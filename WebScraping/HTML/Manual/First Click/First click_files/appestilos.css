@@ -1,0 +1,258 @@
+a:hover {color: #000000; text-decoration: underline}
+a:active {color:#CC0044; text-decoration: underline}
+a {color:#000000; text-decoration: none}
+span
+{
+	font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+	font-size: 8pt;
+	font-weight: bold;
+	color: #cc0044;
+}
+input
+{
+	border-right: #0094C7 1px solid;
+	padding-right: 0px;
+	border-top: #0094C7 1px solid;
+	padding-left: 0px;
+	font-size: 8pt;
+	padding-bottom: 0px;
+	border-left: #0094C7 1px solid;
+	color: #000000;
+	padding-top: 0px;
+	border-bottom: #0094C7 1px solid;
+	font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+	background-color: #f7f7f7;
+}
+SELECT
+{
+	border-right: #0094C7 1px solid;
+	padding-right: 0px;
+	border-top: #0094C7 1px solid;
+	padding-left: 0px;
+	font-size: 8pt;
+	padding-bottom: 0px;
+	margin: 0px;
+	border-left: #0094C7 1px solid;
+	color: #000000;
+	padding-top: 0px;
+	border-bottom: #0094C7 1px solid;
+	font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+	background-color: #f7f7f7;
+  }
+body 
+{
+   scrollbar-face-color: #ffffff;
+   scrollbar-highlight-color: #FFDD88;
+   scrollbar-shadow-color:    #FFDD88;
+   scrollbar-3dlight-color:   #FFFFFF;
+   scrollbar-darkshadow-color: #0094C7;
+   scrollbar-track-color:      #ffffff;
+   scrollbar-arrow-color:      #0094C7;
+   font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+   font-size: 8pt;
+   color:#000000
+}
+table
+{
+   font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+   font-size: 8pt;
+   color:#000000
+}
+tr
+{
+   font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+   font-size: 8pt;
+   color:#000000
+}
+td
+{
+   font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+   font-size: 8pt;
+}
+.titulo1 
+{
+   font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+   font-size:16pt;
+   font-weight: bold;
+   color: #0094C7
+}
+.titulo2 
+{
+   font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+   font-size:10pt;
+   font-weight:bold;
+   color:#0094C7
+}
+.titulo3
+{
+	font-weight: bold;
+	font-size: 10pt;
+	text-transform: uppercase;
+	color: #000000;
+	font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+}
+.titulo4 
+{
+   font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+   font-size:16pt;
+   text-transform:capitalize;
+   font-weight: bold;
+   color:#0094C7
+}
+.titulo5
+{  
+   font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+   font-size: 10pt;
+   font-weight: bold;
+   color:#0094C7
+}
+.toolbar
+{
+   font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+   font-size:8pt;
+   text-transform: uppercase;
+   text-decoration: none;
+   cursor: hand;
+   color: #000000
+}
+.labelNormal
+{
+	font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+	font-size: 8pt;
+	font-weight: normal;
+	color:#000000
+}
+.statusbar
+{
+	font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+	font-size:8pt;
+	font-weight: bold;
+	color: #ffffff
+}
+.boton
+{  
+	font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+	font-size: 8pt;
+	color:#ffffff;
+	background-color:#0094C7;
+	BORDER-TOP: #ffffff 1px solid;
+	BORDER-LEFT: #ffffff 1px solid;
+	BORDER-RIGHT: #0094C7 1px solid;
+	BORDER-BOTTOM: #0094C7 1px solid;
+	PADDING-LEFT: 0px;
+	PADDING-RIGHT: 0px;
+	PADDING-BOTTOM: 0px;
+	PADDING-TOP: 0px
+}
+.radio
+{
+	font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+	font-size: 8pt;
+	BORDER-TOP: #ffffff 0px none;
+	BORDER-LEFT: #ffffff 0px none;
+	BORDER-RIGHT: #ffffff 0px none;
+	BORDER-BOTTOM: #ffffff 0px none;
+	background-color:#ffffff
+}
+.tfolder
+{
+   font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+   font-size: 8pt;
+   color:#ffffff; 
+   background-color: #0094C7
+}
+.ifolder
+{
+   font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+   font-size: 8pt;
+   color: #000000
+}
+.disable
+{
+   font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+   font-size: 8pt;
+   color:#000000; 
+   background-color: #E0E0E0
+}
+.error
+{
+   font-family: Verdana, Sans-Serif, Tahoma, Arial, Helvetica;
+   font-size: 8pt;
+   color: #CC0044
+}
+.bgred
+{
+   font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+   font-size: 8pt;
+   background-color: #CC0044
+}
+.bgyellow
+{
+   font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+   font-size: 8pt;
+   background-color: #FFDD88
+}
+.bggreen
+{
+   font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+   font-size: 8pt;
+   background-color: #0094C7
+}
+.tpage
+{
+	font-size: 12pt;
+	color: 000000;
+	font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+}
+HR
+{
+	color: #0094C7;
+}
+.inputNumber
+{
+	border-right: #0094C7 1px solid;
+	padding-right: 0px;
+	border-top: #0094C7 1px solid;
+	padding-left: 0px;
+	font-size: 8pt;
+	padding-bottom: 0px;
+	border-left: #0094C7 1px solid;
+	color: #000000;
+	padding-top: 0px;
+	border-bottom: #0094C7 1px solid;
+	font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+	background-color: #f7f7f7;
+	text-align: right
+}
+.disableNumber
+{
+	border-right: #0094C7 1px solid;
+	padding-right: 0px;
+	border-top: #0094C7 1px solid;
+	padding-left: 0px;
+	font-size: 8pt;
+	padding-bottom: 0px;
+	border-left: #0094C7 1px solid;
+	color: #000000;
+	padding-top: 0px;
+	border-bottom: #0094C7 1px solid;
+	font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+	background-color: #E0E0E0;
+	text-align: right
+}
+TEXTAREA
+{
+	border-right: #0094C7 1px solid;
+	padding-right: 0px;
+	border-top: #0094C7 1px solid;
+	padding-left: 0px;
+	font-size: 8pt;
+	padding-bottom: 0px;
+	border-left: #0094C7 1px solid;
+	color: #000000;
+	padding-top: 0px;
+	border-bottom: #0094C7 1px solid;
+	font-family: Verdana, sans-serif, Tahoma, Arial, Helvetica;
+	background-color: #f7f7f7
+}
+

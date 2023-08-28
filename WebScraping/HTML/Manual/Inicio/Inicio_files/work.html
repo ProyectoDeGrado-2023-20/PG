@@ -1,0 +1,580 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0014)about:internet -->
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-15" />
+		<title>work</title>
+		<meta content="Microsoft Visual Studio .NET 7.1" name="GENERATOR" />
+		<meta content="C#" name="CODE_LANGUAGE" />
+		<meta content="JavaScript" name="vs_defaultClientScript" />
+		<meta
+			content="http://schemas.microsoft.com/intellisense/ie5"
+			name="vs_targetSchema"
+		/>
+		<link href="./appestilos.css" rel="stylesheet" />
+		<script language="javascript">
+			function syncFrames() {
+				/*
+	if (top.opener)
+		{
+		top.opener.location.href='/SIHO/work.aspx?tOut=true';
+		top.opener.focus();
+		window.close();
+		}
+	else
+		top.parent.areastatus.location = 'status.aspx';
+*/
+				if (window.document.Form1.tbid_usuario.value == "") {
+					window.document.Form1.tbid_usuario.value = "invitado";
+					window.document.Form1.tbcontrasena.value = "invitado";
+				}
+				/*	else*/
+				top.parent.areastatus.location = "status.aspx";
+			}
+
+			function help() {
+				url = "ayudas/ayudageneral.pdf";
+				nombre = "ayuda";
+				atributos =
+					"toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=350,height=300";
+				if (top.ayuda) top.ayuda.focus();
+				else window.open(url, nombre, atributos);
+			}
+
+			function about() {
+				url = "acercade.htm";
+				nombre = "acercade";
+				atributos =
+					"toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=350,height=300";
+				if (top.acercade) top.acercade.focus();
+				else window.open(url, nombre, atributos);
+				return;
+			}
+
+			function salir() {
+				top.window.close();
+				return;
+			}
+
+			function reporte() {
+				url = "ayudas/ReporteCumplimiento_2022.pdf";
+				nombre = "ReporteCumplimiento";
+				atributos =
+					"toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=350,height=300";
+				if (top.ReporteCumplimiento) top.ReporteCumplimiento.focus();
+				else window.open(url, nombre, atributos);
+			}
+
+			function doOutLine(object) {
+				var targetElement;
+				var obj = object.name;
+				targetElement = document.all(obj + "Child");
+
+				if (targetElement.style.display == "block")
+					targetElement.style.display = "none";
+				else targetElement.style.display = "block";
+			}
+		</script>
+	</head>
+	<body
+		bgcolor="#ffffff"
+		onload="syncFrames()"
+		marginwidth="10"
+		marginheight="20"
+	>
+		<form
+			name="Form1"
+			method="post"
+			action="https://prestadores.minsalud.gov.co/SIHO/work.aspx"
+			id="Form1"
+		>
+			<input
+				type="hidden"
+				name="__VIEWSTATE"
+				id="__VIEWSTATE"
+				value="/wEPDwUJOTQyMzIxOTI3ZGTGVG3tnitgCzgmmr+jUwlcJpL2G1x64lNaZXhP6QtMrQ=="
+			/>
+
+			<input
+				type="hidden"
+				name="__VIEWSTATEGENERATOR"
+				id="__VIEWSTATEGENERATOR"
+				value="1532DAF9"
+			/>
+			<input
+				type="hidden"
+				name="__EVENTVALIDATION"
+				id="__EVENTVALIDATION"
+				value="/wEdAASavozIRsHDpfTlMqyR+vV4N+LQ/gIVG6ifezZMWCXUi8o0G4mKGyw5Q/PBQb3URA9t8fuKsCMPoOSzzbQvlqRNVf3qVECr6ae2A7I9FpJn8yoCyzYR+kelIO/7CNCZLYY="
+			/>
+			<table cellspacing="0" cellpadding="0" width="100%" border="0">
+				<tbody>
+					<tr>
+						<td valign="top">
+							<!--Mensaje encima de login-->
+							<!--
+						<MARQUEE style="BORDER-RIGHT: #008844 1px solid; BORDER-TOP: #008844 1px solid; BORDER-LEFT: #008844 1px solid; WIDTH: 180px; BORDER-BOTTOM: #008844 1px solid; HEIGHT: 200px"
+							scrollDelay="150" direction="up" behavior="slide" loop="-1" bgColor="white">
+								<P align="justify"><FONT color="#000080"><b>Por seguridad de su CONTRASE�A</b>.<br><br></FONT>
+								No utilice como contrase�a el nombre de usuario.<br>
+								No utilice contrase�as en blanco.<br>
+								Puede utilizar hasta 20 caracteres combinados entre letras, n�meros y s�mbolos.<br>
+								No diga sus contrase�as a terceros.<br>
+								Si almacena sus contrase�as h�galo en un lugar seguro.
+								</P>
+						</MARQUEE>
+						<BR>
+						<br>
+-->
+							<!--Fin mensaje encima de login -->
+							<table
+								id="Table1"
+								cellspacing="0"
+								cellpadding="0"
+								border="0"
+								style="width: 187px"
+							>
+								<tbody>
+									<tr>
+										<td>
+											<table
+												id="Table2"
+												cellspacing="0"
+												cellpadding="0"
+												width="100%"
+												border="0"
+											>
+												<tbody>
+													<tr>
+														<td
+															valign="top"
+															background="./rdlft.gif"
+															style="height: 23px"
+														>
+															<img
+																height="1"
+																src="./spacer.gif"
+																width="5"
+																border="0"
+															/>
+														</td>
+														<td
+															class="tfolder"
+															style="width: 100%; height: 23px"
+															align="center"
+														>
+															<a
+																href="https://prestadores.minsalud.gov.co/SIHO/work.aspx#"
+																class="tfolder"
+																name="itemLogin"
+																onclick="javascript:doOutLine(this);"
+																title="Acceso a Funcionarios"
+																>Entrada de&nbsp;Usuarios</a
+															>
+														</td>
+														<td
+															valign="top"
+															background="./rdrgt.gif"
+															style="height: 23px"
+															align="center"
+														>
+															<img
+																height="1"
+																src="./spacer(1).gif"
+																width="15"
+																border="0"
+															/>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</td>
+									</tr>
+									<tr>
+										<td style="height: 558px">
+											<div id="itemLoginChild" style="display: block">
+												<table
+													id="Table3"
+													cellspacing="0"
+													cellpadding="1"
+													width="100%"
+													border="0"
+												>
+													<tbody>
+														<tr>
+															<td bgcolor="#0094C7">
+																<table
+																	id="Table4"
+																	cellspacing="0"
+																	cellpadding="0"
+																	width="100%"
+																	border="0"
+																>
+																	<tbody>
+																		<tr>
+																			<td
+																				bgcolor="#ffffff"
+																				style="width: 179px; height: 143px"
+																			>
+																				<table
+																					id="Table5"
+																					cellspacing="0"
+																					cellpadding="0"
+																					border="0"
+																					width="100%"
+																				>
+																					<tbody>
+																						<tr>
+																							<td
+																								style="height: 30px"
+																								align="center"
+																							>
+																								Usuario
+																							</td>
+																							<td
+																								style="height: 30px"
+																								align="center"
+																							>
+																								<input
+																									name="tbid_usuario"
+																									type="text"
+																									maxlength="20"
+																									id="tbid_usuario"
+																									style="
+																										height: 23px;
+																										width: 100px;
+																									"
+																								/>
+																							</td>
+																						</tr>
+																						<tr>
+																							<td
+																								style="height: 30px"
+																								align="center"
+																							>
+																								Contrase�a
+																							</td>
+																							<td
+																								style="height: 30px"
+																								align="center"
+																							>
+																								<input
+																									name="tbcontrasena"
+																									type="password"
+																									id="tbcontrasena"
+																									style="
+																										height: 23px;
+																										width: 100px;
+																									"
+																								/>
+																							</td>
+																						</tr>
+																						<tr>
+																							<td align="center" colspan="2">
+																								<br />
+																								<input
+																									type="submit"
+																									name="btnIngresar"
+																									value="Ingresar"
+																									id="btnIngresar"
+																									style="
+																										height: 20px;
+																										width: 90px;
+																									"
+																								/>
+																							</td>
+																						</tr>
+																						<tr>
+																							<td
+																								colspan="2"
+																								style="height: 26px"
+																								align="center"
+																							>
+																								<br />
+																								<span
+																									id="lblIngresar"
+																									style="
+																										color: #cc0044;
+																										font-weight: normal;
+																									"
+																								></span>
+																							</td>
+																						</tr>
+																					</tbody>
+																				</table>
+																				&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
+																				Registro: 20230721-PRO
+																			</td>
+																		</tr>
+																	</tbody>
+																</table>
+															</td>
+														</tr>
+														<tr>
+															<td></td>
+														</tr>
+														<tr>
+															<td bgcolor="#0094C7">
+																<table
+																	cellpadding="0"
+																	cellspacing="0"
+																	border="0"
+																	width="100%"
+																	style="height: 1px"
+																>
+																	<tbody>
+																		<tr>
+																			<td bgcolor="#ffffff">
+																				<table
+																					id="Table6"
+																					cellspacing="0"
+																					cellpadding="1"
+																					border="0"
+																				>
+																					<tbody>
+																						<tr>
+																							<td style="height: 15px">
+																								<img
+																									src="./bullet.gif"
+																									border="0"
+																								/>
+																							</td>
+																							<td style="height: 15px">
+																								<a
+																									title="Ayuda General"
+																									onclick="javaScript:help();"
+																									href="https://prestadores.minsalud.gov.co/SIHO/work.aspx#"
+																									>Ayuda</a
+																								>
+																							</td>
+																						</tr>
+																					</tbody>
+																				</table>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td bgcolor="#ffffff">
+																				<table
+																					cellspacing="0"
+																					cellpadding="1"
+																					border="0"
+																				>
+																					<tbody>
+																						<tr>
+																							<td>
+																								<img
+																									src="./bullet.gif"
+																									border="0"
+																								/>
+																							</td>
+																							<td>
+																								<a
+																									title="Acerca de ..."
+																									onclick="javaScript:about();"
+																									href="https://prestadores.minsalud.gov.co/SIHO/work.aspx#"
+																									>Acerca De ...</a
+																								>
+																							</td>
+																						</tr>
+																					</tbody>
+																				</table>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td bgcolor="#ffffff">
+																				<table
+																					cellspacing="0"
+																					cellpadding="1"
+																					border="0"
+																				>
+																					<tbody>
+																						<tr>
+																							<td>
+																								<img
+																									src="./bullet.gif"
+																									border="0"
+																								/>
+																							</td>
+																							<td>
+																								<a
+																									title="Salir de la Aplicaci�n"
+																									onclick="javaScript:salir();"
+																									href="https://prestadores.minsalud.gov.co/SIHO/work.aspx#"
+																									>Salir</a
+																								>
+																							</td>
+																						</tr>
+																					</tbody>
+																				</table>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td
+																				align="center"
+																				bgcolor="#ffffff"
+																				style="height: 28px"
+																			>
+																				<span
+																					id="titulo"
+																					style="
+																						color: Black;
+																						font-size: X-Small;
+																						font-weight: bold;
+																						font-style: italic;
+																					"
+																					>INFORMACI�N</span
+																				>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td
+																				align="center"
+																				bgcolor="#ffffff"
+																				style="height: 28px"
+																			>
+																				Para consutar el cumplimiento en la
+																				oportunidad del reporte de que trata el
+																				Decreto 2193 de 2004, compilado en la
+																				Secci�n 2, Cap�tulo 8, T�tulo 3,Parte 5
+																				del Libro 2 del Decreto 780 de 2016 -
+																				Decreto �nico Reglamentario del Sector
+																				Salud y Protecci�n Social, de cada una
+																				de las ESE del Pa�s, con lo cual se da
+																				cumplimiento a lo previsto en el anexo
+																				No. 2 de la Resoluci�n 710 de 2012,
+																				modificada por las Resoluciones 743 de
+																				2013 y 408 de 2018.<br />
+																				&nbsp;
+																				<br />
+																				Puede hacerlo a traves del siguiente
+																				link:
+																			</td>
+																		</tr>
+																		<tr>
+																			<td
+																				align="center"
+																				bgcolor="#ffffff"
+																				style="height: 1px"
+																			></td>
+																		</tr>
+																		<tr>
+																			<td
+																				bgcolor="#ffffff"
+																				align="center"
+																				font-bold="True"
+																			>
+																				<table
+																					id="Table7"
+																					cellspacing="0"
+																					cellpadding="1"
+																					border="0"
+																					style="
+																						font-weight: bold;
+																						color: blue;
+																						font-style: normal;
+																						text-decoration: underline;
+																					"
+																				>
+																					<tbody>
+																						<tr>
+																							<td style="height: 15px">
+																								<img
+																									src="./bullet.gif"
+																									border="0"
+																									style="
+																										color: blue;
+																										text-decoration: underline;
+																									"
+																								/>
+																							</td>
+																							<td style="height: 15px">
+																								<a
+																									title="Reporte Cumplimiento"
+																									onclick="javaScript:reporte();"
+																									href="https://prestadores.minsalud.gov.co/SIHO/work.aspx#"
+																									>Reporte Cumplimiento 2022</a
+																								>
+																							</td>
+																						</tr>
+																					</tbody>
+																				</table>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td
+																				align="center"
+																				bgcolor="#ffffff"
+																				font-bold="True"
+																				style="height: 10px"
+																			></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+											<marquee
+												id="MARQUEE1"
+												style="
+													border-right: #0094c7 1px solid;
+													border-top: #0094c7 1px solid;
+													visibility: hidden;
+													border-left: #0094c7 1px solid;
+													width: 187px;
+													border-bottom: #0094c7 1px solid;
+													height: 160px;
+												"
+												scrolldelay="150"
+												direction="up"
+												behavior="slide"
+												loop="-1"
+												bgcolor="white"
+											></marquee>
+											<br />
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<!--Mensaje debajo de login-->
+							<br />
+							<br />
+							<!--Fin mensaje debajo de login -->
+						</td>
+						<td valign="top">
+							<table cellspacing="0" cellpadding="0" width="100%" border="0">
+								<!--Mensaje sobre menu
+							<tr>
+								<td>
+									<table border="0" cellpadding="1" cellspacing="0" width="90%">
+										<tr>
+											<td bgColor="#008844">
+												<table border="0" cellpadding="0" cellspacing="0" width="100%">
+													<tr>
+														<td bgColor="#f7f7f7">
+															<marquee hspace="10" width="500">Ultima actualizaci�n: 6 de Marzo de 2006. Se 
+																encuentra disponible la informaci�n de los periodos Enero-Marzo, Abril-Junio y 
+																Julio-Septiembre de 2005</marquee>
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+-->
+								<tbody>
+									<tr>
+										<td><span id="lblmenu" class="labelNormal"></span></td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</body>
+</html>
