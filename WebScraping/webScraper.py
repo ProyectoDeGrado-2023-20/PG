@@ -79,11 +79,11 @@ departments = [option.text for option in options_select_departments]
 # Functions
 # ----------------------------------------------------------------------------
 
-def setSelectedYear(select_years: Select, year: str)->Select:
+def setSelectedYear(year: str, select_years: Select)->Select:
     """
     Change the year to search, must be in the years list
     """
-    select_years.select_by_value(year)
+    select_years.select_by_value(year)    
     
     return select_years
 
@@ -97,7 +97,7 @@ def getSelectedYear(select_years: Select)->str:
     return selected_year
 
     
-def setSelectedDepartment(select_departments: Select, department: str)->Select:
+def setSelectedDepartment(department: str, select_departments: Select)->Select:
     """
     Change the departments to search, must be in the departments list
     """
@@ -119,7 +119,7 @@ def getSelectedDepartment(select_departments: Select)->str:
     return selected_department
 
     
-def searchData(driver, select_departments: Select):
+def searchData(select_departments: Select)->None:
     """
     Click the Search Button
     """
@@ -140,7 +140,7 @@ def searchData(driver, select_departments: Select):
     wait.until(is_condition_met)
 
 
-def saveData(driver, select_years: Select, select_departments: Select)->pd.DataFrame:
+def saveData(select_departments: Select, select_years: Select)->pd.DataFrame:
     """
     Save the data from the webpage to a DataFrame
     """
@@ -165,19 +165,89 @@ def concatenateDataframes(df1: pd.DataFrame, df2: pd.DataFrame)->pd.DataFrame:
     return concatenated_df
     
 
-def getInstalledCapacity(driver, df1: pd.DataFrame, select_years: Select, year: str, select_departments: Select, department: str)->pd.DataFrame:
-    select_years = setSelectedYear(select_years, year)
-    select_departments = setSelectedDepartment(select_departments, department)
-    searchData(driver, select_departments)
-    df2 = saveData(driver, select_years, select_departments)
+def getInstalledCapacity(df1: pd.DataFrame, year: str, department: str, select_years: Select, select_departments: Select)->pd.DataFrame:
+    select_years = setSelectedYear(year, select_years)
+    select_departments = setSelectedDepartment(department, select_departments)
+    searchData(select_departments)
+    df2 = saveData(select_departments, select_years)
     df = concatenateDataframes(df1, df2)
     
-    return df
+    return df, select_years, select_departments
+
 
 # ----------------------------------------------------------------------------
+# Initialize the df
+# ----------------------------------------------------------------------------
+
+df_all = pd.DataFrame(columns=['Departamento', 'Anio', 'Concepto', 'Cantidad'])
+
 
 # ----------------------------------------------------------------------------
+# Iterate over years and departments
 # ----------------------------------------------------------------------------
+
+for year in years:
+    
+    print(year)
+    
+    for department in departments:
+        
+        print(department)
+    
+        search_select_years = driver.find_element(By.ID, "_ctl0_ContentPlaceHolder1_ddano")
+        select_years = Select(search_select_years)
+        
+        search_select_departments = driver.find_element(By.ID, "_ctl0_ContentPlaceHolder1_dddepa_codigo")
+        select_departments = Select(search_select_departments)
+        
+        # Set Selected Year
+        select_years.select_by_value(year)
+        
+        # Set Selected Department
+        select_departments.select_by_visible_text(department)
+        
+        # Search Data
+        selected_department = select_departments.all_selected_options[0].text
+        if selected_department == "":
+            selected_department = "Nacional"
+    
+        search_button = driver.find_element(By.ID, "_ctl0_ibBuscarFtr")
+        search_button.click()
+        
+        wait = WebDriverWait(driver, 10)
+
+        def is_condition_met(driver):
+            try:
+                span_element = driver.find_element(By.ID, "_ctl0_ContentPlaceHolder1_lblConsulta")
+                return span_element.text == selected_department.upper()
+            except:
+                return False
+
+        wait.until(is_condition_met)
+    
+        # Save Data
+        df = pd.read_html(driver.page_source, attrs={"id": "_ctl0_ContentPlaceHolder1_dgInforme1"})[0]
+        
+        new_header = df.iloc[0]
+        df = df[1:]
+        df.columns = new_header
+        df['Departamento'] = selected_department
+        df['Anio'] = year
+        df = df[['Departamento', 'Anio', 'Concepto', 'Cantidad']]
+        
+        # Concatenate DataFrames
+        df_all = pd.concat([df_all, df], ignore_index=True)
+        
+        break
+    break
+
+
+# ----------------------------------------------------------------------------
+# Save the Scraped Data
+# ----------------------------------------------------------------------------
+
+df_all.to_csv("./Data/Capacidad_Instalada.csv")
+
 
 # ----------------------------------------------------------------------------
 # End the Scraper
