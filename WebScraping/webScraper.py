@@ -6,7 +6,6 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import pandas as pd
 
 
@@ -80,25 +79,51 @@ departments = [option.text for option in options_select_departments]
 # Functions
 # ----------------------------------------------------------------------------
 
-def changeYear(select_years: Select, year: str):
+def setSelectedYear(select_years: Select, year: str)->Select:
     """
     Change the year to search, must be in the years list
     """
     select_years.select_by_value(year)
     
-def changeDepartment(select_departments: Select, department: str):
+    return select_years
+
+    
+def getSelectedYear(select_years: Select)->str:
+    """
+    Get the year currently selected
+    """
+    selected_year = select_years.all_selected_options[0].get_attribute("value")
+
+    return selected_year
+
+    
+def setSelectedDepartment(select_departments: Select, department: str)->Select:
     """
     Change the departments to search, must be in the departments list
     """
+    if department == "Nacional":
+        department = ""
     select_departments.select_by_visible_text(department)
     
-def searchData(driver, select_departments: Select)->pd.DataFrame:
+    return select_departments
+
+    
+def getSelectedDepartment(select_departments: Select)->str:
     """
-    Click the Search Button
+    Get the Department currently selected
     """
     selected_department = select_departments.all_selected_options[0].text
     if selected_department == "":
-        selected_department = "NACIONAL"
+        selected_department = "Nacional"
+
+    return selected_department
+
+    
+def searchData(driver, select_departments: Select):
+    """
+    Click the Search Button
+    """
+    selected_department = getSelectedDepartment(select_departments)
     
     search_button = driver.find_element(By.ID, "_ctl0_ibBuscarFtr")
     search_button.click()
@@ -115,9 +140,47 @@ def searchData(driver, select_departments: Select)->pd.DataFrame:
     wait.until(is_condition_met)
 
 
+def saveData(driver, select_years: Select, select_departments: Select)->pd.DataFrame:
+    """
+    Save the data from the webpage to a DataFrame
+    """
+    df = pd.read_html(driver.page_source, attrs={"id": "_ctl0_ContentPlaceHolder1_dgInforme1"})[0]
+    
+    new_header = df.iloc[0]
+    df = df[1:]
+    df.columns = new_header
+    df['Departamento'] = getSelectedDepartment(select_departments)
+    df['Anio'] = getSelectedYear(select_years)
+    df = df[['Departamento', 'Anio', 'Concepto', 'Cantidad']]
+
+    return df
+
+
+def concatenateDataframes(df1: pd.DataFrame, df2: pd.DataFrame)->pd.DataFrame:
+    """
+    Concatenate two dataframes with the same columns
+    """
+    concatenated_df = pd.concat([df1, df2], ignore_index=True)
+    
+    return concatenated_df
+    
+
+def getInstalledCapacity(driver, df1: pd.DataFrame, select_years: Select, year: str, select_departments: Select, department: str)->pd.DataFrame:
+    select_years = setSelectedYear(select_years, year)
+    select_departments = setSelectedDepartment(select_departments, department)
+    searchData(driver, select_departments)
+    df2 = saveData(driver, select_years, select_departments)
+    df = concatenateDataframes(df1, df2)
+    
+    return df
+
 # ----------------------------------------------------------------------------
 
 # ----------------------------------------------------------------------------
 # ----------------------------------------------------------------------------
+
 # ----------------------------------------------------------------------------
+# End the Scraper
 # ----------------------------------------------------------------------------
+
+driver.quit()
