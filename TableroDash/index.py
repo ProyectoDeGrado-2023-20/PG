@@ -3,7 +3,7 @@ from dash import dcc
 from dash.dependencies import Input, Output #callback
 
 from app import app
-from pages import inicio,programa
+from pages import inicio,capacidad,contratos
 
 url_contente_layout = html.Div(children=[
     dcc.Location(id="url",refresh=False),
@@ -20,8 +20,10 @@ app.validation_layout = html.Div([
 @app.callback(Output(component_id='output-div', component_property='children'),
               [Input(component_id='url', component_property='pathname')])
 def update_output_div(pathname):
-    if pathname == '/programa':
-        return programa.programa_layout
+    if pathname == '/capacidad':
+        return capacidad.capacidad_layout
+    elif pathname == '/contratos':
+        return contratos.contratos_layout
     else:
         return inicio.inicio_layout
 
