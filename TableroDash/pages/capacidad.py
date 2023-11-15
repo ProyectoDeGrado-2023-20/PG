@@ -9,11 +9,13 @@ from apps import navigation
 from dash import dcc
 from dash import html
 from dash.dependencies import Input, Output
-from dotenv import dotenv_values
+# from dotenv import dotenv_values
 import pandas as pd
 import plotly.graph_objects as go
-import dash_core_components as dcc
-import dash_html_components as html
+# import dash_core_components as dcc
+# import dash_html_components as html
+from dash import dcc
+from dash import html
 import plotly.express as px
 from dash import html
 import dash_bootstrap_components as dbc
@@ -46,19 +48,19 @@ capacidad = [
 
 
 sidebar = html.Div(children=[
-            html.Label('Selecciona un departamento:'),
-            dcc.Dropdown(
-                id='departamento-dropdown',
-                options=[{'label': d, 'value': d} for d in departamentos],
-                value=departamentos[0]
-            ),
-            html.Label('Selecciona una opción para la gráfica:'),
-            dcc.Dropdown(
-                id='capacidad-dropdown',
-                options=[{'label': opt, 'value': opt} for opt in capacidad],
-                value=capacidad[0]
-            )
-        ])
+    html.Label('Selecciona un departamento:'),
+    dcc.Dropdown(
+        id='departamento-dropdown',
+        options=[{'label': d, 'value': d} for d in departamentos],
+        value=departamentos[0]
+    ),
+    html.Label('Selecciona una opción para la gráfica:'),
+    dcc.Dropdown(
+        id='capacidad-dropdown',
+        options=[{'label': opt, 'value': opt} for opt in capacidad],
+        value=capacidad[0]
+    )
+])
 
 # -------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------
@@ -86,16 +88,16 @@ capacidad_layout = html.Div(children=[
     html.Br(),
 
     dbc.Container(
-    [
-        dbc.Row(
-            [
-                dbc.Col(sidebar, width=3, className='bg-light'),
-                dbc.Col(graph, width=9)
+        [
+            dbc.Row(
+                [
+                    dbc.Col(sidebar, width=3, className='bg-light'),
+                    dbc.Col(graph, width=9)
                 ],
-            style={"height": "100vh"}
+                style={"height": "100vh"}
             ),
         ],
-    fluid=True
+        fluid=True
     )
 ])
 
@@ -103,9 +105,11 @@ capacidad_layout = html.Div(children=[
 # Callback para actualizar la gráfica
 @app.callback(
     Output('grafica_capacidad', 'figure'),
-    [Input('departamento-dropdown', 'value'), Input('capacidad-dropdown', 'value')]
+    [Input('departamento-dropdown', 'value'),
+     Input('capacidad-dropdown', 'value')]
 )
 def actualizar_grafica(departamento, opcion_grafica):
-    fig = px.line(df[df['Departamento'] == departamento], x='Anio', y=opcion_grafica, color='Departamento')
+    fig = px.line(df[df['Departamento'] == departamento],
+                  x='Anio', y=opcion_grafica, color='Departamento')
 
     return fig
