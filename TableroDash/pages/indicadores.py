@@ -6,9 +6,9 @@ texto = '''Contratos'''
 
 texto3 = 'Aplicación creada por Santiago González y Juliana Cárdenas.'
 
-contratos_layout = html.Div(children=[
+indicadores_layout = html.Div(children=[
 
-    #Barra de Navegación
+    # Barra de Navegación
     navigation.navbar,
     html.Br()
 
