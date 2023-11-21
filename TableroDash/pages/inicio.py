@@ -60,7 +60,7 @@ indicadores = dbc.Card(
     ],
     style={
         "width": "30%",
-        # 'height': 'auto',
+        'height': '500 px',
     },
 )
 
