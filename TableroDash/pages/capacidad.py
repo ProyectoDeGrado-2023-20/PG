@@ -22,7 +22,7 @@ import dash_bootstrap_components as dbc
 
 # -------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------
-# DATABASE
+# Data
 # -------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------
 
@@ -47,20 +47,21 @@ capacidad = [
 # -------------------------------------------------------------------------------------------------------------------
 
 
-sidebar = html.Div(children=[
-    html.Label('Selecciona un departamento:'),
-    dcc.Dropdown(
-        id='departamento-dropdown',
-        options=[{'label': d, 'value': d} for d in departamentos],
-        value=departamentos[0]
-    ),
-    html.Label('Selecciona una opción para la gráfica:'),
-    dcc.Dropdown(
-        id='capacidad-dropdown',
-        options=[{'label': opt, 'value': opt} for opt in capacidad],
-        value=capacidad[0]
-    )
-])
+sidebar = html.Div(
+    children=[
+        html.Label('Selecciona un departamento:'),
+        dcc.Dropdown(
+            id='departamento-dropdown',
+            options=[{'label': d, 'value': d} for d in departamentos],
+            value='Nacional'
+        ),
+        html.Label('Selecciona una opción para la gráfica:'),
+        dcc.Dropdown(
+            id='capacidad-dropdown',
+            options=[{'label': opt, 'value': opt} for opt in capacidad],
+            value=capacidad[0]
+        )
+    ])
 
 # -------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------
@@ -81,28 +82,34 @@ graph = html.Div(
 # -------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------
 
-capacidad_layout = html.Div(children=[
+capacidad_layout = html.Div(
+    children=[
+        # Barra de Navegación
+        navigation.navbar,
 
-    # Barra de Navegación
-    navigation.navbar,
-    html.Br(),
+        html.Br(),
 
-    dbc.Container(
-        [
-            dbc.Row(
-                [
-                    dbc.Col(sidebar, width=3, className='bg-light'),
-                    dbc.Col(graph, width=9)
-                ],
-                style={"height": "100vh"}
-            ),
-        ],
-        fluid=True
-    )
-])
+        dbc.Container(
+            [
+                dbc.Row(
+                    [
+                        dbc.Col(sidebar, width=3, className='bg-light'),
+                        dbc.Col(graph, width=9)
+                    ],
+                    style={"height": "100vh"}
+                ),
+            ],
+            fluid=True
+        )
+    ])
 
 
-# Callback para actualizar la gráfica
+# -------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------------------------
+# Callback
+# -------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------------------------
+
 @app.callback(
     Output('grafica_capacidad', 'figure'),
     [Input('departamento-dropdown', 'value'),
