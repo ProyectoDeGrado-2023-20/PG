@@ -11,13 +11,12 @@ from dash import html
 from dash.dependencies import Input, Output
 # from dotenv import dotenv_values
 import pandas as pd
-import plotly.graph_objects as go
 # import dash_core_components as dcc
 # import dash_html_components as html
 from dash import dcc
 from dash import html
 import plotly.express as px
-from dash import html
+import plotly.graph_objects as go
 import dash_bootstrap_components as dbc
 
 # -------------------------------------------------------------------------------------------------------------------
@@ -116,7 +115,11 @@ capacidad_layout = html.Div(
      Input('capacidad-dropdown', 'value')]
 )
 def actualizar_grafica(departamento, opcion_grafica):
-    fig = px.line(df[df['Departamento'] == departamento],
-                  x='Anio', y=opcion_grafica, color='Departamento')
+
+    fig = px.line(
+        df[df['Departamento'] == departamento],
+        x='Anio',
+        y=opcion_grafica,
+        color='Departamento')
 
     return fig
