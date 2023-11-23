@@ -322,59 +322,179 @@ indicadores_layout = html.Div(children=[
     html.Br(),
 
     # Sección Distancias
-    html.H2(
-        'Distancia a IPS Pública más Cercana por Nivel',
+    html.Div(
+        children=[
+            html.H2(
+                'Distancia a IPS Pública más Cercana por Nivel',
+                style={
+                    'text-align': 'center'
+                }
+            ),
+            html.P(
+                children=[
+                    '''
+                    Con el propósito de analizar el acceso a las IPS Públicas en cada municipio, se llevará a cabo un estudio focalizado en las distancias que deben recorrer los residentes para acceder a una IPS de un nivel de complejidad.
+                    '''
+                ],
+                style={
+                    'width': '80%',
+                    'text-align': 'justify',
+                }
+            ),
+            html.P(
+                children=[
+                    '''
+                    Con el propósito de analizar el acceso a las IPS Públicas en cada municipio, se llevará a cabo un estudio focalizado en las distancias que deben recorrer los residentes para acceder a una IPS de un nivel de complejidad.
+                    '''
+                ],
+                style={
+                    'width': '80%',
+                    'text-align': 'justify',
+                }
+            ),
+            html.P(
+                children=[
+                    '''
+                    Este análisis proporcionará una visión más detallada de la distribución de las IPS Públicas, teniendo en cuenta tanto su clasificación por complejidad como la ubicación geográfica de los municipios, lo cual será fundamental para comprender la accesibilidad de los servicios de salud en los municipios y las regiones y poder tomar decisiones orientadas a satisfacer las necesidades de las poblaciones más afectadas.
+                    '''
+                ],
+                style={
+                    'width': '80%',
+                    'text-align': 'justify',
+                }
+            ),
+        ],
         style={
-            'text-align': 'center'
+            # 'width': '100%',
+            'display': 'flex',
+            'flex-direction': 'column',
+            'justify-content': 'center',
+            'align-items': 'center',
         }
     ),
 
-
+    html.Br(),
 
     # Fila 1 Mapas - Distancia N1 vs Distancia*Poblacion N1
     html.Div(
         children=[
-            graph_fig_mapa_ips_publicas_n1,
-            graph_fig_mapa_poblacion_ips_publicas_n1,
+            html.Div(
+                children=[
+                    html.H5(
+                        'Distancia a IPS Pública de Nivel 1'
+                    ),
+                    graph_fig_mapa_ips_publicas_n1,
+                ],
+                style={
+                    'display': 'flex',
+                    'flex-direction': 'column',
+                    'justify-content': 'center',
+                    'align-items': 'center',
+                }
+            ),
+            html.Div(
+                children=[
+                    html.H5(
+                        'Distancia Ponderada por Población a IPS Pública de Nivel 1'
+                    ),
+                    graph_fig_mapa_poblacion_ips_publicas_n1,
+                ],
+                style={
+                    'display': 'flex',
+                    'flex-direction': 'column',
+                    'justify-content': 'center',
+                    'align-items': 'center',
+                }
+            )
         ],
         style={
             'display': 'flex',
-            'justify-content': 'center',
+            'justify-content': 'space-between',
             'width': '100%'
             # 'overflow': 'hidden',
         }
-
     ),
 
-    # Fila 1 Mapas - Distancia N1 vs Distancia*Poblacion N1
+    # Fila 2 Mapas - Distancia N2 vs Distancia*Poblacion N2
     html.Div(
         children=[
-            graph_fig_mapa_ips_publicas_n2,
-            graph_fig_mapa_poblacion_ips_publicas_n2,
+            html.Div(
+                children=[
+                    html.H5(
+                        'Distancia a IPS Pública de Nivel 2'
+                    ),
+                    graph_fig_mapa_ips_publicas_n2,
+                ],
+                style={
+                    'display': 'flex',
+                    'flex-direction': 'column',
+                    'justify-content': 'center',
+                    'align-items': 'center',
+                }
+            ),
+            html.Div(
+                children=[
+                    html.H5(
+                        'Distancia Ponderada por Población a IPS Pública de Nivel 2'
+                    ),
+                    graph_fig_mapa_poblacion_ips_publicas_n2,
+                ],
+                style={
+                    'display': 'flex',
+                    'flex-direction': 'column',
+                    'justify-content': 'center',
+                    'align-items': 'center',
+                }
+            )
         ],
         style={
             'display': 'flex',
-            'justify-content': 'center',
+            'justify-content': 'space-between',
             'width': '100%'
             # 'overflow': 'hidden',
         }
-
     ),
 
-    # Fila 1 Mapas - Distancia N1 vs Distancia*Poblacion N1
+    # Fila 3 Mapas - Distancia N3 vs Distancia*Poblacion N3
     html.Div(
         children=[
-            graph_fig_mapa_ips_publicas_n3,
-            graph_fig_mapa_poblacion_ips_publicas_n3,
+            html.Div(
+                children=[
+                    html.H5(
+                        'Distancia a IPS Pública de Nivel 3'
+                    ),
+                    graph_fig_mapa_ips_publicas_n3,
+                ],
+                style={
+                    'display': 'flex',
+                    'flex-direction': 'column',
+                    'justify-content': 'center',
+                    'align-items': 'center',
+                }
+            ),
+            html.Div(
+                children=[
+                    html.H5(
+                        'Distancia Ponderada por Población a IPS Pública de Nivel 3'
+                    ),
+                    graph_fig_mapa_poblacion_ips_publicas_n3,
+                ],
+                style={
+                    'display': 'flex',
+                    'flex-direction': 'column',
+                    'justify-content': 'center',
+                    'align-items': 'center',
+                }
+            )
         ],
         style={
             'display': 'flex',
-            'justify-content': 'center',
+            'justify-content': 'space-between',
             'width': '100%'
             # 'overflow': 'hidden',
         }
-
     ),
+
 
 
 ])
