@@ -22,15 +22,22 @@ import plotly.graph_objects as go
 # -------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------
 
+file_path = './Data/Colombia_Departamentos_Modified.json'
+with open(file_path, 'r') as file:
+    geojson_departamentos = json.load(file)
+
 file_path = './Data/Colombia_Municipios_Modified.json'
 with open(file_path, 'r') as file:
-    geojson = json.load(file)
+    geojson_municipios = json.load(file)
+
 
 df_mapa_ips_publicas = pd.read_csv('./Data/Mapa_Distancia_IPS_Publicas.csv')
 df_mapa_ips = pd.read_csv('./Data/Mapa_Distancia_IPS.csv')
+
 df_ips_por_departamentos = pd.read_csv('./Data/IPS_por_Departamentos_2022.csv')
 df_ips_por_departamentos_habitantes = pd.read_csv(
     './Data/IPS_por_Departamentos_Habitantes_2022.csv')
+df_mapa_numero_ips = pd.read_csv('./Data/Mapa_Numero_IPS.csv')
 
 
 # -------------------------------------------------------------------------------------------------------------------
@@ -102,6 +109,140 @@ graph_numero_ips_departamento_por_habitantes = html.Div(
 
 
 # -------------------------------------------------------------------------------------------------------------------
+# Mapa Numero IPS por Habitantes
+# -------------------------------------------------------------------------------------------------------------------
+
+locations = df_mapa_numero_ips['Departamento_DANE']
+fig_mapa_numero_ips = go.Figure(
+    go.Choroplethmapbox(
+        geojson=geojson_departamentos,
+        locations=locations,
+        featureidkey='properties.Departamento',
+        # featureidkey='properties.NOMBRE_DPT',
+        z=df_mapa_numero_ips['IPS_2022'],
+        # colorscale='RdBu',
+        # colorscale=["#d05447", "#f6f7f7", "#A2CDE2", "#307AB6", "#3364C7"],
+        colorscale=[
+            "#b62020",
+        ]*1 +
+        # [
+        #     "#cb2424",
+        # ]*1 +
+        # [
+        #     "#fe2e2e",
+        # ]*1 +
+        # [
+        #     "#fe8181",
+        # ]*1 +
+        # [
+        #     "#fff",
+        # ]*1 +
+        [
+            "#b3cde0",
+        ]*1 +
+        [
+            "#6497b1",
+        ]*1 +
+        [
+            "#005b96",
+        ]*1 +
+        [
+            "#03396c",
+        ]*1 +
+        [
+            "#011f4b",
+        ]*1,
+
+        # ["#d05447", "#A2CDE2", "#3364C7", "#3364C7"],
+        colorbar_title="Numero IPS"
+        # color
+    )
+)
+
+fig_mapa_numero_ips.update_layout(
+    # mapbox_style="carto-positron",
+    mapbox_style="white-bg",
+    mapbox_zoom=4.7,
+    mapbox_center={"lat": 4.570868, "lon": -74.2973328},
+    width=900,
+    height=900
+)
+
+graph_mapa_numero_ips_departamento = html.Div(
+    [
+        dcc.Graph(figure=fig_mapa_numero_ips)
+    ]
+)
+
+
+# -------------------------------------------------------------------------------------------------------------------
+# Mapa Numero IPS por Habitantes
+# -------------------------------------------------------------------------------------------------------------------
+
+locations = df_mapa_numero_ips['Departamento_DANE']
+fig_mapa_numero_ips_habitantes = go.Figure(
+    go.Choroplethmapbox(
+        geojson=geojson_departamentos,
+        locations=locations,
+        featureidkey='properties.Departamento',
+        # featureidkey='properties.NOMBRE_DPT',
+        z=df_mapa_numero_ips['IPS/Habitantes'],
+        # colorscale='RdBu',
+        # colorscale=["#d05447", "#f6f7f7", "#A2CDE2", "#307AB6", "#3364C7"],
+        colorscale=[
+            "#b62020",
+        ]*1 +
+        # [
+        #     "#cb2424",
+        # ]*1 +
+        # [
+        #     "#fe2e2e",
+        # ]*1 +
+        [
+            "#fe8181",
+        ]*1 +
+        # [
+        #     "#fff",
+        # ]*1 +
+        [
+            "#b3cde0",
+        ]*1 +
+        [
+            "#6497b1",
+        ]*1 +
+        [
+            "#005b96",
+        ]*1 +
+        [
+            "#03396c",
+        ]*1 +
+        [
+            "#011f4b",
+        ]*1,
+
+        # ["#d05447", "#A2CDE2", "#3364C7", "#3364C7"],
+        colorbar_title="Numero IPS por cada 100 mil habitantes"
+        # color
+    )
+)
+
+fig_mapa_numero_ips_habitantes.update_layout(
+    # mapbox_style="carto-positron",
+    mapbox_style="white-bg",
+    mapbox_zoom=4.7,
+    mapbox_center={"lat": 4.570868, "lon": -74.2973328},
+    width=1000,
+    height=900
+)
+
+graph_mapa_numero_ips_departamento_habitantes = html.Div(
+    [
+        dcc.Graph(figure=fig_mapa_numero_ips_habitantes)
+    ]
+)
+
+
+# -------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------
 # Mapa Distancias a IPS Publicas
 # -------------------------------------------------------------------------------------------------------------------
@@ -120,7 +261,7 @@ locations = df_mapa_ips_publicas['Municipio_Departamento']
 fig_mapa_ips_publicas_n1 = go.Figure(
 
     go.Choroplethmapbox(
-        geojson=geojson,
+        geojson=geojson_municipios,
         locations=locations,
         featureidkey='properties.key',
         z=df_mapa_ips_publicas['Distancia_IPS_Nivel_1'],
@@ -170,7 +311,7 @@ graph_fig_mapa_ips_publicas_n1 = html.Div(
 fig_mapa_ips_publicas_n2 = go.Figure(
 
     go.Choroplethmapbox(
-        geojson=geojson,
+        geojson=geojson_municipios,
         locations=locations,
         featureidkey='properties.key',
         z=df_mapa_ips_publicas['Distancia_IPS_Nivel_2'],
@@ -220,7 +361,7 @@ graph_fig_mapa_ips_publicas_n2 = html.Div(
 fig_mapa_ips_publicas_n3 = go.Figure(
 
     go.Choroplethmapbox(
-        geojson=geojson,
+        geojson=geojson_municipios,
         locations=locations,
         featureidkey='properties.key',
         z=df_mapa_ips_publicas['Distancia_IPS_Nivel_3'],
@@ -279,7 +420,7 @@ locations = df_mapa_ips_publicas['Municipio_Departamento']
 fig_mapa_poblacion_ips_publicas_n1 = go.Figure(
 
     go.Choroplethmapbox(
-        geojson=geojson,
+        geojson=geojson_municipios,
         locations=locations,
         featureidkey='properties.key',
         z=df_mapa_ips_publicas['Distancia_Poblacion_IPS_Nivel_1'],
@@ -329,7 +470,7 @@ graph_fig_mapa_poblacion_ips_publicas_n1 = html.Div(
 fig_mapa_poblacion_ips_publicas_n2 = go.Figure(
 
     go.Choroplethmapbox(
-        geojson=geojson,
+        geojson=geojson_municipios,
         locations=locations,
         featureidkey='properties.key',
         z=df_mapa_ips_publicas['Distancia_Poblacion_IPS_Nivel_2'],
@@ -379,7 +520,7 @@ graph_fig_mapa_poblacion_ips_publicas_n2 = html.Div(
 fig_mapa_poblacion_ips_publicas_n3 = go.Figure(
 
     go.Choroplethmapbox(
-        geojson=geojson,
+        geojson=geojson_municipios,
         locations=locations,
         featureidkey='properties.key',
         z=df_mapa_ips_publicas['Distancia_Poblacion_IPS_Nivel_3'],
@@ -441,7 +582,7 @@ locations = df_mapa_ips['Municipio_Departamento']
 fig_mapa_ips_n1 = go.Figure(
 
     go.Choroplethmapbox(
-        geojson=geojson,
+        geojson=geojson_municipios,
         locations=locations,
         featureidkey='properties.key',
         z=df_mapa_ips['Distancia_IPS_Nivel_1'],
@@ -491,7 +632,7 @@ graph_fig_mapa_ips_n1 = html.Div(
 fig_mapa_ips_n2 = go.Figure(
 
     go.Choroplethmapbox(
-        geojson=geojson,
+        geojson=geojson_municipios,
         locations=locations,
         featureidkey='properties.key',
         z=df_mapa_ips['Distancia_IPS_Nivel_2'],
@@ -541,7 +682,7 @@ graph_fig_mapa_ips_n2 = html.Div(
 fig_mapa_ips_n3 = go.Figure(
 
     go.Choroplethmapbox(
-        geojson=geojson,
+        geojson=geojson_municipios,
         locations=locations,
         featureidkey='properties.key',
         z=df_mapa_ips['Distancia_IPS_Nivel_3'],
@@ -600,7 +741,7 @@ locations = df_mapa_ips['Municipio_Departamento']
 fig_mapa_poblacion_ips_n1 = go.Figure(
 
     go.Choroplethmapbox(
-        geojson=geojson,
+        geojson=geojson_municipios,
         locations=locations,
         featureidkey='properties.key',
         z=df_mapa_ips['Distancia_Poblacion_IPS_Nivel_1'],
@@ -650,7 +791,7 @@ graph_fig_mapa_poblacion_ips_n1 = html.Div(
 fig_mapa_poblacion_ips_n2 = go.Figure(
 
     go.Choroplethmapbox(
-        geojson=geojson,
+        geojson=geojson_municipios,
         locations=locations,
         featureidkey='properties.key',
         z=df_mapa_ips['Distancia_Poblacion_IPS_Nivel_2'],
@@ -700,7 +841,7 @@ graph_fig_mapa_poblacion_ips_n2 = html.Div(
 fig_mapa_poblacion_ips_n3 = go.Figure(
 
     go.Choroplethmapbox(
-        geojson=geojson,
+        geojson=geojson_municipios,
         locations=locations,
         featureidkey='properties.key',
         z=df_mapa_ips['Distancia_Poblacion_IPS_Nivel_3'],
@@ -763,10 +904,20 @@ indicadores_layout = html.Div(children=[
     # Sección Numero de IPS e IPS por Habitantes
     # -------------------------------------------------------------------------------------------------------------------
 
+    # Departamento
     html.Div(
         children=[
             html.H2(
-                'Número de IPS e IPS por Habitantes',
+                'Análisis del Número de IPS en Colombia',
+                style={
+                    'text-align': 'center'
+                }
+            ),
+
+            html.Br(),
+
+            html.H3(
+                'Departamental',
                 style={
                     'text-align': 'center'
                 }
@@ -774,7 +925,18 @@ indicadores_layout = html.Div(children=[
             html.P(
                 children=[
                     '''
-                    
+                    El indicador inicial más obvio para analizar la distribución de las Instituciones Prestadoras de Salud (IPS) en Colombia es el número de IPS que hay por cada Departamento. Sin embargo, este indicador no tiene en cuenta que es normal que las ciudades más grandes y los departamentos más poblados concentran la mayoría de las IPS.
+                    '''
+                ],
+                style={
+                    'width': '80%',
+                    'text-align': 'justify',
+                }
+            ),
+            html.P(
+                children=[
+                    '''
+                    Por lo tanto, se decide calcular una razón que relacione el número de IPS y la población de cada departamento. De esto surge el número de IPS por cada 100 mil habitantes.
                     '''
                 ],
                 style={
@@ -796,13 +958,33 @@ indicadores_layout = html.Div(children=[
         children=[
             html.Div(
                 children=[
-                    graph_numero_ips_departamento
+                    html.H5(
+                        'Número de IPS'
+                    ),
+                    graph_numero_ips_departamento,
+                    graph_mapa_numero_ips_departamento,
                 ],
+                style={
+                    'display': 'flex',
+                    'flex-direction': 'column',
+                    'justify-content': 'center',
+                    'align-items': 'center',
+                },
             ),
             html.Div(
                 children=[
-                    graph_numero_ips_departamento_por_habitantes
+                    html.H5(
+                        'Número de IPS por Cada 100 mil Habitantes'
+                    ),
+                    graph_numero_ips_departamento_por_habitantes,
+                    graph_mapa_numero_ips_departamento_habitantes,
                 ],
+                style={
+                    'display': 'flex',
+                    'flex-direction': 'column',
+                    'justify-content': 'center',
+                    'align-items': 'center',
+                },
             ),
         ],
         style={
@@ -811,7 +993,86 @@ indicadores_layout = html.Div(children=[
             'width': '100%'
             # 'overflow': 'hidden',
         }
-    )
+    ),
+
+    html.Div(
+        children=[
+            html.Br(),
+
+            html.H3(
+                'Municipal',
+                style={
+                    'text-align': 'center'
+                }
+            ),
+            html.P(
+                children=[
+                    '''
+                    A pesar de que con el indicador por departamentos es posible hacerse una idea de cuales son los departamentos en los que hacen falta mayor presencia de Instituciones Prestadoras de Salud este es un nivel de abstracción demasiado alto. 
+                    '''
+                ],
+                style={
+                    'width': '80%',
+                    'text-align': 'justify',
+                }
+            ),
+            html.P(
+                children=[
+                    '''
+                    En consecuencia, es necesario tomar los mismos indicadores pero con un nivel de granuladidad más alto. En este caso, profundizamos de departamentos a los municipios en Colombia.
+                    '''
+                ],
+                style={
+                    'width': '80%',
+                    'text-align': 'justify',
+                }
+            ),
+        ],
+        style={
+            # 'width': '100%',
+            'display': 'flex',
+            'flex-direction': 'column',
+            'justify-content': 'center',
+            'align-items': 'center',
+        }
+    ),
+
+    html.Div(
+        children=[
+            html.Div(
+                children=[
+                    html.H5(
+                        'Número de IPS'
+                    ),
+                ],
+                style={
+                    'display': 'flex',
+                    'flex-direction': 'column',
+                    'justify-content': 'center',
+                    'align-items': 'center',
+                },
+            ),
+            html.Div(
+                children=[
+                    html.H5(
+                        'Número de IPS por Cada 100 mil Habitantes'
+                    ),
+                ],
+                style={
+                    'display': 'flex',
+                    'flex-direction': 'column',
+                    'justify-content': 'center',
+                    'align-items': 'center',
+                },
+            ),
+        ],
+        style={
+            'display': 'flex',
+            'justify-content': 'space-between',
+            'width': '100%'
+            # 'overflow': 'hidden',
+        }
+    ),
 
 
     # -------------------------------------------------------------------------------------------------------------------
@@ -997,6 +1258,7 @@ indicadores_layout = html.Div(children=[
     # # -------------------------------------------------------------------------------------------------------------------
     # # Sección IPS - Distancias
     # # -------------------------------------------------------------------------------------------------------------------
+
     # html.Div(
     #     children=[
     #         html.H2(
