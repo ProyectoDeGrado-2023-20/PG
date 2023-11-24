@@ -1197,7 +1197,7 @@ indicadores_layout = html.Div(children=[
             html.P(
                 children=[
                     '''
-                    El indicador inicial más obvio para analizar la distribución de las Instituciones Prestadoras de Salud (IPS) en Colombia es el número de IPS que hay por cada Departamento. Sin embargo, este indicador no tiene en cuenta que es normal que las ciudades más grandes y los departamentos más poblados concentran la mayoría de las IPS.
+                    El primer indicador para analizar la distribución de las Instituciones Prestadoras de Salud (IPS) en Colombia es el número de IPS que hay por cada Departamento. Sin embargo, este indicador no tiene en cuenta que es normal que las ciudades más grandes y los departamentos más poblados concentran la mayoría de las IPS.
                     '''
                 ],
                 style={
@@ -1221,6 +1221,7 @@ indicadores_layout = html.Div(children=[
             # 'width': '100%',
             'display': 'flex',
             'flex-direction': 'column',
+            # 'flex-wrap': 'wrap',
             'justify-content': 'center',
             'align-items': 'center',
         }
@@ -1261,7 +1262,9 @@ indicadores_layout = html.Div(children=[
         ],
         style={
             'display': 'flex',
-            'justify-content': 'space-between',
+            # 'flex-wrap': 'wrap',
+            # 'justify-content': 'center',
+            'justify-content': 'start',
             'width': '100%'
             # 'overflow': 'hidden',
         }
@@ -1343,7 +1346,9 @@ indicadores_layout = html.Div(children=[
         ],
         style={
             'display': 'flex',
-            'justify-content': 'space-between',
+            # 'flex-wrap': 'wrap',
+            # 'justify-content': 'center',
+            'justify-content': 'start',
             'width': '100%'
             # 'overflow': 'hidden',
         }
@@ -1457,7 +1462,9 @@ indicadores_layout = html.Div(children=[
         ],
         style={
             'display': 'flex',
-            'justify-content': 'space-between',
+            # 'flex-wrap': 'wrap',
+            # 'justify-content': 'center',
+            'justify-content': 'start',
             'width': '100%'
             # 'overflow': 'hidden',
         }
@@ -1555,7 +1562,9 @@ indicadores_layout = html.Div(children=[
         ],
         style={
             'display': 'flex',
-            'justify-content': 'space-between',
+            # 'flex-wrap': 'wrap',
+            # 'justify-content': 'center',
+            'justify-content': 'start',
             'width': '100%'
             # 'overflow': 'hidden',
         }
@@ -1595,7 +1604,9 @@ indicadores_layout = html.Div(children=[
         ],
         style={
             'display': 'flex',
-            'justify-content': 'space-between',
+            # 'flex-wrap': 'wrap',
+            # 'justify-content': 'center',
+            'justify-content': 'start',
             'width': '100%'
             # 'overflow': 'hidden',
         }
@@ -1635,7 +1646,9 @@ indicadores_layout = html.Div(children=[
         ],
         style={
             'display': 'flex',
-            'justify-content': 'space-between',
+            # 'flex-wrap': 'wrap',
+            # 'justify-content': 'center',
+            'justify-content': 'start',
             'width': '100%'
             # 'overflow': 'hidden',
         }
@@ -1749,7 +1762,9 @@ indicadores_layout = html.Div(children=[
         ],
         style={
             'display': 'flex',
-            'justify-content': 'space-between',
+            # 'flex-wrap': 'wrap',
+            # 'justify-content': 'center',
+            'justify-content': 'start',
             'width': '100%'
             # 'overflow': 'hidden',
         }
@@ -1789,7 +1804,9 @@ indicadores_layout = html.Div(children=[
         ],
         style={
             'display': 'flex',
-            'justify-content': 'space-between',
+            # 'flex-wrap': 'wrap',
+            # 'justify-content': 'center',
+            'justify-content': 'start',
             'width': '100%'
             # 'overflow': 'hidden',
         }
@@ -1829,7 +1846,9 @@ indicadores_layout = html.Div(children=[
         ],
         style={
             'display': 'flex',
-            'justify-content': 'space-between',
+            # 'flex-wrap': 'wrap',
+            # 'justify-content': 'center',
+            'justify-content': 'start',
             'width': '100%'
             # 'overflow': 'hidden',
         }

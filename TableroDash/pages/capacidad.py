@@ -71,7 +71,7 @@ sidebar = html.Div(
 
 graph = html.Div(
     [
-        dcc.Graph(id='grafica_capacidad')
+        dcc.Graph(id='grafica_capacidad', figure=px.line())
     ]
 )
 
@@ -120,6 +120,11 @@ def actualizar_grafica(departamento, opcion_grafica):
         df[df['Departamento'] == departamento],
         x='Anio',
         y=opcion_grafica,
-        color='Departamento')
+        color='Departamento',
+        # ylim=(0, df[opcion_grafica].max())
+    )
+
+    fig.update_yaxes(
+        range=[0, df[opcion_grafica].max() + df[opcion_grafica].std()])
 
     return fig
