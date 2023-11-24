@@ -22,34 +22,48 @@ import plotly.graph_objects as go
 # -------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------
 
-file_path = './Data/Colombia_Departamentos_Modified.json'
-with open(file_path, 'r') as file:
-    geojson_departamentos = json.load(file)
-
-file_path = './Data/Colombia_Municipios_Modified.json'
-with open(file_path, 'r') as file:
-    geojson_municipios = json.load(file)
-
-
-df_mapa_ips_publicas = pd.read_csv('./Data/Mapa_Distancia_IPS_Publicas.csv')
-df_mapa_ips = pd.read_csv('./Data/Mapa_Distancia_IPS.csv')
-
+# Datos de Numero IPS - Departamentos
 df_ips_por_departamentos = pd.read_csv('./Data/IPS_por_Departamentos_2022.csv')
+
+# Datos de los Mapas de Numero IPS - Departamentos
+df_mapa_numero_ips = pd.read_csv('./Data/Mapa_Numero_IPS.csv')
+
+# Datos de Numero IPS - Municipios
 df_ips_por_departamentos_habitantes = pd.read_csv(
     './Data/IPS_por_Departamentos_Habitantes_2022.csv')
 
-df_mapa_numero_ips = pd.read_csv('./Data/Mapa_Numero_IPS.csv')
+# Datos de los Mapas de Numero IPS - Municipios
 df_mapa_numero_ips_municipios = pd.read_csv(
     './Data/Mapa_Numero_IPS_Municipios.csv')
 
+# Datos de Distribucion Naturaleza Juridica
 df_ips_naturaleza_juridica = pd.read_csv(
     './Data/Distribucion_Naturaleza_Juridica_IPS.csv')
 df_ips_naturaleza_juridica['Category'] = ''
 
+# Datos de Distribucion Naturaleza Juridica por Departamento
 df_naturaleza_juridica_numero_departamento = pd.read_csv(
     './Data/Naturaleza_Juridica_Numero_IPS.csv')
+# TODO: Unir estos dos df en uno solo
 df_naturaleza_juridica_porcentaje_departamento = pd.read_csv(
     './Data/Naturaleza_Juridica_Porcentaje_IPS.csv')
+
+# Geojson para mapas Departamentos
+file_path = './Data/Colombia_Departamentos_Modified.json'
+with open(file_path, 'r') as file:
+    geojson_departamentos = json.load(file)
+
+# Geojson para Mapas Municipios
+file_path = './Data/Colombia_Municipios_Modified.json'
+with open(file_path, 'r') as file:
+    geojson_municipios = json.load(file)
+
+# Datos de los Mapas de Distancias IPS Publicas
+df_mapa_ips_publicas = pd.read_csv('./Data/Mapa_Distancia_IPS_Publicas.csv')
+# TODO: Unir en uno solo estos dos df's
+# Datos de los Mapas de Distancias IPS Modelo
+df_mapa_ips = pd.read_csv('./Data/Mapa_Distancia_IPS.csv')
+
 
 # -------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------
