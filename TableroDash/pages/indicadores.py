@@ -36,7 +36,7 @@ df_ips_por_departamentos_habitantes = pd.read_csv(
 df_mapa_numero_ips_municipios = pd.read_csv(
     './Data/Mapa_Numero_IPS_Municipios.csv')
 
-# Datos de Distribucion Naturaleza Juridica
+# Datos de Distribucion Naturaleza Juridica Nacional
 df_ips_naturaleza_juridica = pd.read_csv(
     './Data/Naturaleza_Juridica_Nacional.csv')
 df_ips_naturaleza_juridica['Category'] = ''
@@ -61,6 +61,119 @@ df_mapa_distancia_ips = pd.read_csv('./Data/Mapa_Distancia_IPS.csv')
 
 # -------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------
+# Funciones
+# -------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------------------------
+
+# -------------------------------------------------------------------------------------------------------------------
+# Barras Departamento - Numero y Numero por cada mil habitantes
+
+def graph_barras_ips_departamento(df: pd.DataFrame, x: str, y: str, range_x: list, width: int, x_axes: str, title: str):
+    fig = px.bar(data_frame=df,
+                 x=x,
+                 y=y,
+                 orientation='h')
+
+    fig.update_xaxes(title_text=x_axes)
+    fig.update_xaxes(range=range_x)
+    fig.update_yaxes(title_text='')
+    fig.update_layout(title=title)
+
+    color_sequence = [
+        '#3364C7' for i in df[y]]
+    fig.update_traces(marker=dict(color=color_sequence))
+
+    fig.update_traces(
+        text=df[x], textposition='outside')
+
+    fig.update_layout(width=width, height=700)
+
+    graph_barras_ips_departamento = html.Div(
+        [
+            dcc.Graph(figure=fig)
+        ]
+    )
+
+    return graph_barras_ips_departamento
+
+# -------------------------------------------------------------------------------------------------------------------
+# Barras Departamento - Numero y Numero por cada mil habitantes
+
+
+def graph_mapa_ips_departamento(geojson: dict, df: pd.DataFrame, locations: str, z: str, colorscale: list, title: str, zoom: float, width: int):
+    locations = df[locations]
+
+    fig = go.Figure(
+        go.Choroplethmapbox(
+            geojson=geojson,
+            locations=locations,
+            featureidkey='properties.Departamento',
+            z=df[z],
+            colorscale=colorscale
+        )
+    )
+
+    fig.update_layout(
+        mapbox_style="white-bg",
+        mapbox_zoom=zoom,
+        mapbox_center={"lat": 4.570868, "lon": -74.2973328},
+        width=width,
+        height=720
+    )
+
+    fig.update_layout(
+        title=title
+    )
+
+    graph_mapa_ips_departamento = html.Div(
+        [
+            dcc.Graph(figure=fig)
+        ]
+    )
+
+    return graph_mapa_ips_departamento
+
+
+# -------------------------------------------------------------------------------------------------------------------
+# Barras Departamento - Numero y Numero por cada mil habitantes
+
+
+def graph_mapa_ips_municipio(geojson: dict, df: pd.DataFrame, locations: str, z: str, colorscale: list, title: str, zoom: float, width: int):
+    locations = df[locations]
+    fig = go.Figure(
+        go.Choroplethmapbox(
+            geojson=geojson,
+            locations=locations,
+            featureidkey='properties.key',
+            z=df[z],
+            colorscale=colorscale
+        )
+    )
+
+    fig.update_layout(
+        mapbox_style="white-bg",
+        # mapbox_style="carto-positron",
+        mapbox_zoom=zoom,
+        mapbox_center={"lat": 43.5, "lon": -62.3},
+        width=width,
+        height=800
+    )
+
+    fig.update_layout(
+        title=title
+    )
+
+    graph_mapa_ips_municipio = html.Div(
+        [
+            dcc.Graph(figure=fig)
+        ]
+    )
+
+    return graph_mapa_ips_municipio
+
+
+# -------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------------------------
 # Numero IPS e IPS por Habitantes
 # -------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------
@@ -68,204 +181,46 @@ df_mapa_distancia_ips = pd.read_csv('./Data/Mapa_Distancia_IPS.csv')
 # -------------------------------------------------------------------------------------------------------------------
 # Numero de IPS - Departamentos
 
-fig_numero_ips = px.bar(data_frame=df_ips_por_departamentos,
-                        x='IPS_2022',
-                        y='Departamento',
-                        orientation='h')
-
-fig_numero_ips.update_xaxes(title_text='Número de IPS')
-fig_numero_ips.update_xaxes(range=[0, 3100])
-fig_numero_ips.update_yaxes(title_text='Departamento')
-fig_numero_ips.update_layout(title='Número de IPS por Departamento - 2022')
-
-color_sequence = ['#3364C7' for i in df_ips_por_departamentos['Departamento']]
-fig_numero_ips.update_traces(marker=dict(color=color_sequence))
-
-fig_numero_ips.update_traces(
-    text=df_ips_por_departamentos['IPS_2022'], textposition='outside')
-
-fig_numero_ips.update_layout(width=800, height=700)
-
-
-graph_numero_ips_departamento = html.Div(
-    [
-        dcc.Graph(figure=fig_numero_ips)
-    ]
-)
+graph_numero_ips_departamento = graph_barras_ips_departamento(df_ips_por_departamentos, 'IPS_2022', 'Departamento', [
+                                                              0, 3200], 640, 'Número de IPS', 'Número de IPS por Departamento - 2022')
 
 
 # -------------------------------------------------------------------------------------------------------------------
 # Numero IPS por Habitantes - Departamentos
 
-fig_ips_por_habitantes = px.bar(data_frame=df_ips_por_departamentos_habitantes,
-                                x='IPS/Habitantes',
-                                y='Departamento',
-                                orientation='h')
-
-fig_ips_por_habitantes.update_xaxes(
-    title_text='IPS por cada 100 mil habitantes')
-fig_ips_por_habitantes.update_yaxes(title_text='Departamento')
-fig_ips_por_habitantes.update_layout(
-    title='Número de IPS por cada 100 mil habitantes por Departamento - 2022')
-
-color_sequence = [
-    '#3364C7' for i in df_ips_por_departamentos_habitantes['Departamento']]
-fig_ips_por_habitantes.update_traces(marker=dict(color=color_sequence))
-
-fig_ips_por_habitantes.update_traces(
-    text=df_ips_por_departamentos_habitantes['IPS/Habitantes'], textposition='outside')
-
-
-fig_ips_por_habitantes.update_layout(width=800, height=700)
-
-graph_numero_ips_departamento_por_habitantes = html.Div(
-    [
-        dcc.Graph(figure=fig_ips_por_habitantes)
-    ]
-)
+graph_numero_ips_departamento_por_habitantes = graph_barras_ips_departamento(df_ips_por_departamentos_habitantes, 'IPS/Habitantes', 'Departamento', [
+                                                                             0, 130], 640, 'Número de IPS por cada 100 mil Habitantes', 'Número de IPS por cada 100 mil Habitantes por Departamento - 2022')
 
 
 # -------------------------------------------------------------------------------------------------------------------
 # Mapa Numero IPS - Departamentos
 
-locations = df_mapa_numero_ips['Departamento_DANE']
-fig_mapa_numero_ips = go.Figure(
-    go.Choroplethmapbox(
-        geojson=geojson_departamentos,
-        locations=locations,
-        featureidkey='properties.Departamento',
-        # featureidkey='properties.NOMBRE_DPT',
-        z=df_mapa_numero_ips['IPS_2022'],
-        # colorscale='RdBu',
-        # colorscale=["#d05447", "#f6f7f7", "#A2CDE2", "#307AB6", "#3364C7"],
-        colorscale=[
-            "#b62020",
-        ]*1 +
-        # [
-        #     "#cb2424",
-        # ]*1 +
-        # [
-        #     "#fe2e2e",
-        # ]*1 +
-        # [
-        #     "#fe8181",
-        # ]*1 +
-        # [
-        #     "#fff",
-        # ]*1 +
-        [
-            "#b3cde0",
-        ]*1 +
-        [
-            "#6497b1",
-        ]*1 +
-        [
-            "#005b96",
-        ]*1 +
-        [
-            "#03396c",
-        ]*1 +
-        [
-            "#011f4b",
-        ]*1,
+colorscale = ["#b62020",
+              ]*1 + ["#b3cde0",
+                     ]*1 + ["#6497b1",
+                            ]*1 + ["#005b96",
+                                   ]*1 + ["#03396c",
+                                          ]*1 + ["#011f4b",
+                                                 ]*1
 
-        # ["#d05447", "#A2CDE2", "#3364C7", "#3364C7"],
-        colorbar_title="Numero IPS"
-        # color
-    )
-)
-
-fig_mapa_numero_ips.update_layout(
-    # mapbox_style="carto-positron",
-    mapbox_style="white-bg",
-    mapbox_zoom=4.4,
-    mapbox_center={"lat": 4.570868, "lon": -74.2973328},
-    width=640,
-    height=720
-)
-
-
-fig_mapa_numero_ips.update_layout(
-    title='Número de IPS por Departamento'
-)
-
-graph_mapa_numero_ips_departamento = html.Div(
-    [
-        dcc.Graph(figure=fig_mapa_numero_ips)
-    ]
-)
+graph_mapa_numero_ips_departamento = graph_mapa_ips_departamento(
+    geojson_departamentos, df_mapa_numero_ips, 'Departamento_DANE', 'IPS_2022', colorscale, 'Número de IPS por Departamento', 4.4, 640)
 
 
 # -------------------------------------------------------------------------------------------------------------------
 # Mapa Numero IPS por Habitantes - Departamentos
 
-locations = df_mapa_numero_ips['Departamento_DANE']
-fig_mapa_numero_ips_habitantes = go.Figure(
-    go.Choroplethmapbox(
-        geojson=geojson_departamentos,
-        locations=locations,
-        featureidkey='properties.Departamento',
-        # featureidkey='properties.NOMBRE_DPT',
-        z=df_mapa_numero_ips['IPS/Habitantes'],
-        # colorscale='RdBu',
-        # colorscale=["#d05447", "#f6f7f7", "#A2CDE2", "#307AB6", "#3364C7"],
-        colorscale=[
-            "#b62020",
-        ]*1 +
-        # [
-        #     "#cb2424",
-        # ]*1 +
-        # [
-        #     "#fe2e2e",
-        # ]*1 +
-        [
-            "#fe8181",
-        ]*1 +
-        # [
-        #     "#fff",
-        # ]*1 +
-        [
-            "#b3cde0",
-        ]*1 +
-        [
-            "#6497b1",
-        ]*1 +
-        [
-            "#005b96",
-        ]*1 +
-        [
-            "#03396c",
-        ]*1 +
-        [
-            "#011f4b",
-        ]*1,
+colorscale = ["#b62020",
+              ]*1 + ["#fe8181",
+                     ]*1 + ["#b3cde0",
+                            ]*1 + ["#6497b1",
+                                   ]*1 + ["#005b96",
+                                          ]*1 + ["#03396c",
+                                                 ]*1 + ["#011f4b",
+                                                        ]*2
 
-        # ["#d05447", "#A2CDE2", "#3364C7", "#3364C7"],
-        # colorbar_title="Numero IPS por cada 100 mil habitantes"
-        # color
-    )
-)
-
-fig_mapa_numero_ips_habitantes.update_layout(
-    # mapbox_style="carto-positron",
-    mapbox_style="white-bg",
-    mapbox_zoom=4.4,
-    mapbox_center={"lat": 4.570868, "lon": -74.2973328},
-    width=640,
-    height=720
-)
-
-
-fig_mapa_numero_ips_habitantes.update_layout(
-    title='Número IPS por cada 100 mil habitantes por Departamento'
-)
-
-
-graph_mapa_numero_ips_departamento_habitantes = html.Div(
-    [
-        dcc.Graph(figure=fig_mapa_numero_ips_habitantes)
-    ]
-)
+graph_mapa_numero_ips_departamento_habitantes = graph_mapa_ips_departamento(
+    geojson_departamentos, df_mapa_numero_ips, 'Departamento_DANE', 'IPS/Habitantes', colorscale, 'Número de IPS por cada 100 mil Habitantes por Departamento', 4.4, 640)
 
 
 # -------------------------------------------------------------------------------------------------------------------
@@ -1590,290 +1545,6 @@ indicadores_layout = html.Div(children=[
                         'Distancia Ponderada por Población a IPS Pública de Nivel 1'
                     ),
                     graph_fig_mapa_poblacion_ips_publicas_n1,
-                ],
-                style={
-                    'display': 'flex',
-                    'flex-direction': 'column',
-                    'justify-content': 'center',
-                    'align-items': 'center',
-                }
-            )
-        ],
-        style={
-            'display': 'flex',
-            # 'flex-wrap': 'wrap',
-            # 'justify-content': 'center',
-            'justify-content': 'start',
-            'width': '100%'
-            # 'overflow': 'hidden',
-        }
-    ),
-
-    # Fila 2 Mapas - Distancia N2 vs Distancia*Poblacion N2
-    html.Div(
-        children=[
-            html.Div(
-                children=[
-                    html.H5(
-                        'Distancia a IPS Pública de Nivel 2'
-                    ),
-                    # graph_fig_mapa_ips_publicas_n2,
-                ],
-                style={
-                    'display': 'flex',
-                    'flex-direction': 'column',
-                    'justify-content': 'center',
-                    'align-items': 'center',
-                }
-            ),
-            html.Div(
-                children=[
-                    html.H5(
-                        'Distancia Ponderada por Población a IPS Pública de Nivel 2'
-                    ),
-                    # graph_fig_mapa_poblacion_ips_publicas_n2,
-                ],
-                style={
-                    'display': 'flex',
-                    'flex-direction': 'column',
-                    'justify-content': 'center',
-                    'align-items': 'center',
-                }
-            )
-        ],
-        style={
-            'display': 'flex',
-            # 'flex-wrap': 'wrap',
-            # 'justify-content': 'center',
-            'justify-content': 'start',
-            'width': '100%'
-            # 'overflow': 'hidden',
-        }
-    ),
-
-    # Fila 3 Mapas - Distancia N3 vs Distancia*Poblacion N3
-    html.Div(
-        children=[
-            html.Div(
-                children=[
-                    html.H5(
-                        'Distancia a IPS Pública de Nivel 3'
-                    ),
-                    # graph_fig_mapa_ips_publicas_n3,
-                ],
-                style={
-                    'display': 'flex',
-                    'flex-direction': 'column',
-                    'justify-content': 'center',
-                    'align-items': 'center',
-                }
-            ),
-            html.Div(
-                children=[
-                    html.H5(
-                        'Distancia Ponderada por Población a IPS Pública de Nivel 3'
-                    ),
-                    # graph_fig_mapa_poblacion_ips_publicas_n3,
-                ],
-                style={
-                    'display': 'flex',
-                    'flex-direction': 'column',
-                    'justify-content': 'center',
-                    'align-items': 'center',
-                }
-            )
-        ],
-        style={
-            'display': 'flex',
-            # 'flex-wrap': 'wrap',
-            # 'justify-content': 'center',
-            'justify-content': 'start',
-            'width': '100%'
-            # 'overflow': 'hidden',
-        }
-    ),
-
-    html.Br(),
-
-
-    # -------------------------------------------------------------------------------------------------------------------
-    # Sección IPS - Distancias
-    # -------------------------------------------------------------------------------------------------------------------
-
-    html.Div(
-        children=[
-            html.H2(
-                'Distancia a IPS más Cercana por Nivel',
-                style={
-                    'text-align': 'center'
-                }
-            ),
-            html.P(
-                children=[
-                    '''
-                    Una de las principales limitantes al comparar las IPS entre sí es que no todas tienen la misma capacidad tecnológica, de personal médico y de instalaciones. Ante esta situación se delimitaron como vimos anteriormente una clasificación por complejidades: Baja (1), Mediana (2), Alta(3). Sin embargo, unicamente las IPS con naturaleza jurídica Pública se encuentran con esta clasificación, volviendo incomparables las IPS públicas, privadas y mixtas.
-                    '''
-                ],
-                style={
-                    'width': '80%',
-                    'text-align': 'justify',
-                }
-            ),
-            html.P(
-                children=[
-                    '''
-                    Para lidiar con esta situación se creó un modelo de Machine Learning que pueda clasificar cualquier tipo de IPS (pública, privada, mixta) según sus capacidades instaladas tales como:
-                    ''',
-                    html.Ul(
-                        children=[
-                            html.Li('Camas'),
-                            html.Li('Consultorios'),
-                            html.Li('Ambulancias'),
-                            html.Li('Consultorios de Urgencias'),
-                            html.Li('Camillas'),
-                            html.Li('Salas de Cirugía'),
-                        ],
-                        style={
-                            # 'width': '80%',
-                        }
-                    ),
-
-                ],
-                style={
-                    'width': '80%',
-                    'text-align': 'justify',
-                }
-            ),
-            html.P(
-                children=[
-                    '''
-                    Ahora que podemos comparar las IPS directamente sin importar su naturaleza jurídica podemos ver las distancias que debe recorrer una persona en un municipio para ir a un municipio con una IPS de determinada complejidad: Baja (1), Mediana (2), Alta(3).
-                    '''
-                ],
-                style={
-                    'width': '80%',
-                    'text-align': 'justify',
-                }
-            ),
-        ],
-        style={
-            # 'width': '80%',
-            'display': 'flex',
-            'flex-direction': 'column',
-            'justify-content': 'center',
-            'align-items': 'center',
-        }
-    ),
-
-    html.Br(),
-
-    # Fila 1 Mapas - Distancia N1 vs Distancia*Poblacion N1
-    html.Div(
-        children=[
-            html.Div(
-                children=[
-                    html.H5(
-                        'Distancia a IPS de Nivel 1'
-                    ),
-                    # graph_fig_mapa_ips_n1,
-                ],
-                style={
-                    'display': 'flex',
-                    'flex-direction': 'column',
-                    'justify-content': 'center',
-                    'align-items': 'center',
-                }
-            ),
-            html.Div(
-                children=[
-                    html.H5(
-                        'Distancia Ponderada por Población a IPS de Nivel 1'
-                    ),
-                    # graph_fig_mapa_poblacion_ips_n1,
-                ],
-                style={
-                    'display': 'flex',
-                    'flex-direction': 'column',
-                    'justify-content': 'center',
-                    'align-items': 'center',
-                }
-            )
-        ],
-        style={
-            'display': 'flex',
-            # 'flex-wrap': 'wrap',
-            # 'justify-content': 'center',
-            'justify-content': 'start',
-            'width': '100%'
-            # 'overflow': 'hidden',
-        }
-    ),
-
-    # Fila 2 Mapas - Distancia N2 vs Distancia*Poblacion N2
-    html.Div(
-        children=[
-            html.Div(
-                children=[
-                    html.H5(
-                        'Distancia a IPS de Nivel 2'
-                    ),
-                    # graph_fig_mapa_ips_n2,
-                ],
-                style={
-                    'display': 'flex',
-                    'flex-direction': 'column',
-                    'justify-content': 'center',
-                    'align-items': 'center',
-                }
-            ),
-            html.Div(
-                children=[
-                    html.H5(
-                        'Distancia Ponderada por Población a IPS de Nivel 2'
-                    ),
-                    # graph_fig_mapa_poblacion_ips_n2,
-                ],
-                style={
-                    'display': 'flex',
-                    'flex-direction': 'column',
-                    'justify-content': 'center',
-                    'align-items': 'center',
-                }
-            )
-        ],
-        style={
-            'display': 'flex',
-            # 'flex-wrap': 'wrap',
-            # 'justify-content': 'center',
-            'justify-content': 'start',
-            'width': '100%'
-            # 'overflow': 'hidden',
-        }
-    ),
-
-    # Fila 3 Mapas - Distancia N3 vs Distancia*Poblacion N3
-    html.Div(
-        children=[
-            html.Div(
-                children=[
-                    html.H5(
-                        'Distancia a IPS de Nivel 3'
-                    ),
-                    # graph_fig_mapa_ips_n3,
-                ],
-                style={
-                    'display': 'flex',
-                    'flex-direction': 'column',
-                    'justify-content': 'center',
-                    'align-items': 'center',
-                }
-            ),
-            html.Div(
-                children=[
-                    html.H5(
-                        'Distancia Ponderada por Población a IPS de Nivel 3'
-                    ),
-                    # graph_fig_mapa_poblacion_ips_n3,
                 ],
                 style={
                     'display': 'flex',
