@@ -11,9 +11,10 @@ from dash import html
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 import json
-import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+import pandas as pd
+import polars as pl
 
 
 # -------------------------------------------------------------------------------------------------------------------
@@ -38,15 +39,12 @@ df_mapa_numero_ips_municipios = pd.read_csv(
 
 # Datos de Distribucion Naturaleza Juridica
 df_ips_naturaleza_juridica = pd.read_csv(
-    './Data/Distribucion_Naturaleza_Juridica_IPS.csv')
+    './Data/Naturaleza_Juridica_Nacional.csv')
 df_ips_naturaleza_juridica['Category'] = ''
 
 # Datos de Distribucion Naturaleza Juridica por Departamento
-df_naturaleza_juridica_numero_departamento = pd.read_csv(
-    './Data/Naturaleza_Juridica_Numero_IPS.csv')
-# TODO: Unir estos dos df en uno solo
-df_naturaleza_juridica_porcentaje_departamento = pd.read_csv(
-    './Data/Naturaleza_Juridica_Porcentaje_IPS.csv')
+df_naturaleza_juridica_departamento = pd.read_csv(
+    './Data/Naturaleza_Juridica_Departamento.csv')
 
 # Geojson para mapas Departamentos
 file_path = './Data/Colombia_Departamentos_Modified.json'
@@ -59,10 +57,7 @@ with open(file_path, 'r') as file:
     geojson_municipios = json.load(file)
 
 # Datos de los Mapas de Distancias IPS Publicas
-df_mapa_ips_publicas = pd.read_csv('./Data/Mapa_Distancia_IPS_Publicas.csv')
-# TODO: Unir en uno solo estos dos df's
-# Datos de los Mapas de Distancias IPS Modelo
-df_mapa_ips = pd.read_csv('./Data/Mapa_Distancia_IPS.csv')
+df_mapa_distancia_ips = pd.read_csv('./Data/Mapa_Distancia_IPS.csv')
 
 
 # -------------------------------------------------------------------------------------------------------------------
@@ -478,8 +473,8 @@ color_palette = {
     'Mixta': '#826251'
 }
 
-fig_ips_naturaleza_juridica_numero_departamento = px.bar(data_frame=df_naturaleza_juridica_numero_departamento,
-                                                         x='IPS_2022',
+fig_ips_naturaleza_juridica_numero_departamento = px.bar(data_frame=df_naturaleza_juridica_departamento,
+                                                         x='Numero_IPS',
                                                          y='Departamento',
                                                          color='NaturalezaJuridica',
                                                          orientation='h',
@@ -513,8 +508,8 @@ color_palette = {
     'Mixta': '#826251'
 }
 
-fig_ips_naturaleza_juridica_porcentaje_departamento = px.bar(data_frame=df_naturaleza_juridica_porcentaje_departamento,
-                                                             x='IPS_2022',
+fig_ips_naturaleza_juridica_porcentaje_departamento = px.bar(data_frame=df_naturaleza_juridica_departamento,
+                                                             x='Porcentaje_IPS',
                                                              y='Departamento',
                                                              color='NaturalezaJuridica',
                                                              orientation='h',
@@ -549,7 +544,7 @@ graph_ips_naturaleza_juridica_porcentaje_departamento = html.Div(
 width_mapa_distancia = 950
 width_mapa_distancia_poblacion = 1000
 
-locations = df_mapa_ips_publicas['Municipio_Departamento']
+locations = df_mapa_distancia_ips['Municipio_Departamento']
 
 
 # -------------------------------------------------------------------------------------------------------------------
@@ -561,7 +556,7 @@ fig_mapa_ips_publicas_n1 = go.Figure(
         geojson=geojson_municipios,
         locations=locations,
         featureidkey='properties.key',
-        z=df_mapa_ips_publicas['Distancia_IPS_Nivel_1'],
+        z=df_mapa_distancia_ips['Distancia_IPS_Nivel_1_Publicas'],
         colorscale=[
             "#fff",
         ]*1 +
@@ -610,7 +605,7 @@ fig_mapa_ips_publicas_n2 = go.Figure(
         geojson=geojson_municipios,
         locations=locations,
         featureidkey='properties.key',
-        z=df_mapa_ips_publicas['Distancia_IPS_Nivel_2'],
+        z=df_mapa_distancia_ips['Distancia_IPS_Nivel_2_Publicas'],
         colorscale=[
             "#fff",
         ]*1 +
@@ -659,7 +654,7 @@ fig_mapa_ips_publicas_n3 = go.Figure(
         geojson=geojson_municipios,
         locations=locations,
         featureidkey='properties.key',
-        z=df_mapa_ips_publicas['Distancia_IPS_Nivel_3'],
+        z=df_mapa_distancia_ips['Distancia_IPS_Nivel_3_Publicas'],
         colorscale=[
             "#fff",
         ]*1 +
@@ -705,7 +700,7 @@ graph_fig_mapa_ips_publicas_n3 = html.Div(
 # -------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------
 
-locations = df_mapa_ips_publicas['Municipio_Departamento']
+locations = df_mapa_distancia_ips['Municipio_Departamento']
 
 
 # -------------------------------------------------------------------------------------------------------------------
@@ -717,7 +712,7 @@ fig_mapa_poblacion_ips_publicas_n1 = go.Figure(
         geojson=geojson_municipios,
         locations=locations,
         featureidkey='properties.key',
-        z=df_mapa_ips_publicas['Distancia_Poblacion_IPS_Nivel_1'],
+        z=df_mapa_distancia_ips['Distancia_Poblacion_IPS_Nivel_1_Publicas'],
         colorscale=[
             "#fff",
         ]*1 +
@@ -766,7 +761,7 @@ fig_mapa_poblacion_ips_publicas_n2 = go.Figure(
         geojson=geojson_municipios,
         locations=locations,
         featureidkey='properties.key',
-        z=df_mapa_ips_publicas['Distancia_Poblacion_IPS_Nivel_2'],
+        z=df_mapa_distancia_ips['Distancia_Poblacion_IPS_Nivel_2_Publicas'],
         colorscale=[
             "#fff",
         ]*1 +
@@ -815,7 +810,7 @@ fig_mapa_poblacion_ips_publicas_n3 = go.Figure(
         geojson=geojson_municipios,
         locations=locations,
         featureidkey='properties.key',
-        z=df_mapa_ips_publicas['Distancia_Poblacion_IPS_Nivel_3'],
+        z=df_mapa_distancia_ips['Distancia_Poblacion_IPS_Nivel_3_Publicas'],
         colorscale=[
             "#fff",
         ]*1 +
@@ -864,7 +859,7 @@ graph_fig_mapa_poblacion_ips_publicas_n3 = html.Div(
 width_mapa_distancia = 950
 width_mapa_distancia_poblacion = 1000
 
-locations = df_mapa_ips['Municipio_Departamento']
+locations = df_mapa_distancia_ips['Municipio_Departamento']
 
 
 # -------------------------------------------------------------------------------------------------------------------
@@ -876,7 +871,7 @@ fig_mapa_ips_n1 = go.Figure(
         geojson=geojson_municipios,
         locations=locations,
         featureidkey='properties.key',
-        z=df_mapa_ips['Distancia_IPS_Nivel_1'],
+        z=df_mapa_distancia_ips['Distancia_IPS_Nivel_1_Modelo'],
         colorscale=[
             "#fff",
         ]*1 +
@@ -925,7 +920,7 @@ fig_mapa_ips_n2 = go.Figure(
         geojson=geojson_municipios,
         locations=locations,
         featureidkey='properties.key',
-        z=df_mapa_ips['Distancia_IPS_Nivel_2'],
+        z=df_mapa_distancia_ips['Distancia_IPS_Nivel_2_Modelo'],
         colorscale=[
             "#fff",
         ]*1 +
@@ -974,7 +969,7 @@ fig_mapa_ips_n3 = go.Figure(
         geojson=geojson_municipios,
         locations=locations,
         featureidkey='properties.key',
-        z=df_mapa_ips['Distancia_IPS_Nivel_3'],
+        z=df_mapa_distancia_ips['Distancia_IPS_Nivel_3_Modelo'],
         colorscale=[
             "#fff",
         ]*1 +
@@ -1020,7 +1015,7 @@ graph_fig_mapa_ips_n3 = html.Div(
 # -------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------
 
-locations = df_mapa_ips['Municipio_Departamento']
+locations = df_mapa_distancia_ips['Municipio_Departamento']
 
 
 # -------------------------------------------------------------------------------------------------------------------
@@ -1032,7 +1027,7 @@ fig_mapa_poblacion_ips_n1 = go.Figure(
         geojson=geojson_municipios,
         locations=locations,
         featureidkey='properties.key',
-        z=df_mapa_ips['Distancia_Poblacion_IPS_Nivel_1'],
+        z=df_mapa_distancia_ips['Distancia_Poblacion_IPS_Nivel_1_Modelo'],
         colorscale=[
             "#fff",
         ]*1 +
@@ -1081,7 +1076,7 @@ fig_mapa_poblacion_ips_n2 = go.Figure(
         geojson=geojson_municipios,
         locations=locations,
         featureidkey='properties.key',
-        z=df_mapa_ips['Distancia_Poblacion_IPS_Nivel_2'],
+        z=df_mapa_distancia_ips['Distancia_Poblacion_IPS_Nivel_2_Modelo'],
         colorscale=[
             "#fff",
         ]*1 +
@@ -1130,7 +1125,7 @@ fig_mapa_poblacion_ips_n3 = go.Figure(
         geojson=geojson_municipios,
         locations=locations,
         featureidkey='properties.key',
-        z=df_mapa_ips['Distancia_Poblacion_IPS_Nivel_3'],
+        z=df_mapa_distancia_ips['Distancia_Poblacion_IPS_Nivel_3_Modelo'],
         colorscale=[
             "#fff",
         ]*1 +
