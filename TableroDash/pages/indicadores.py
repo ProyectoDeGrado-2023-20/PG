@@ -448,7 +448,7 @@ indicadores_layout = html.Div(children=[
     html.Div(
         children=[
             html.H2(
-                'Análisis del Número de IPS en Colombia',
+                'Análisis de las Instituciones Prestadoras de Salud (IPS) en Colombia',
                 style={
                     'text-align': 'center'
                 }
@@ -465,18 +465,7 @@ indicadores_layout = html.Div(children=[
             html.P(
                 children=[
                     '''
-                    El primer indicador para analizar la distribución de las Instituciones Prestadoras de Salud (IPS) en Colombia es el número de IPS que hay por cada Departamento. Sin embargo, este indicador no tiene en cuenta que es normal que las ciudades más grandes y los departamentos más poblados concentran la mayoría de las IPS.
-                    '''
-                ],
-                style={
-                    'width': '80%',
-                    'text-align': 'justify',
-                }
-            ),
-            html.P(
-                children=[
-                    '''
-                    Por lo tanto, se decide calcular una razón que relacione el número de IPS y la población de cada departamento. De esto surge el número de IPS por cada 100 mil habitantes.
+                    A nivel Departamental es posible observar el número de IPS y el número de IPS por cada 100 mil habitantes.
                     '''
                 ],
                 style={
@@ -552,18 +541,7 @@ indicadores_layout = html.Div(children=[
             html.P(
                 children=[
                     '''
-                    A pesar de que con el indicador por departamentos es posible hacerse una idea de cuales son los departamentos en los que hacen falta mayor presencia de Instituciones Prestadoras de Salud este es un nivel de abstracción demasiado alto.
-                    '''
-                ],
-                style={
-                    'width': '80%',
-                    'text-align': 'justify',
-                }
-            ),
-            html.P(
-                children=[
-                    '''
-                    En consecuencia, es necesario tomar los mismos indicadores pero con un nivel de granuladidad más alto. En este caso, profundizamos de departamentos a los municipios en Colombia.
+                    Es posible ir a un nivel más detallado realizando este mismo análisis, pero a nivel de cada municipio.
                     '''
                 ],
                 style={
@@ -642,18 +620,7 @@ indicadores_layout = html.Div(children=[
             html.P(
                 children=[
                     '''
-                    Logramos desagregar los indicadores en varios factores: población, departamentos y municipios. Sin embargo, hasta ahora no hemos tomado en cuenta las diferencias entre cada IPS, es decir, las capacidades físicas, tecnológicas, médicas de cada una.
-                    '''
-                ],
-                style={
-                    'width': '80%',
-                    'text-align': 'justify',
-                }
-            ),
-            html.P(
-                children=[
-                    '''
-                    Para atacar esta situación se ha definido una clasificación por el nivel de complejidad de la IPS, dividiendose en:
+                    Las IPS se encuentran divididas según su complejidad o nivel de atención así:
                     ''',
                     html.Ul(
                         children=[
@@ -677,7 +644,7 @@ indicadores_layout = html.Div(children=[
             html.P(
                 children=[
                     '''
-                    Sin embargo, esta clasificación solo existe para las IPS cuya Naturaleza Jurídica es Pública. Por lo que es necesario entender cúal es la distribucion de todas las IPS por naturaleza jurídica.
+                    Sin embargo, esta clasificación solo existe para las IPS cuya Naturaleza Jurídica es Pública. Por lo que es necesario entender cúal es la distribucion de todas las IPS por naturaleza jurídica a nivel general y departamental.
                     '''
                 ],
                 style={
@@ -754,7 +721,7 @@ indicadores_layout = html.Div(children=[
             html.P(
                 children=[
                     '''
-                    Con el propósito de analizar el acceso a las IPS Públicas en cada municipio, se llevará a cabo un estudio focalizado en las distancias que deben recorrer los residentes para acceder a una IPS de un nivel de complejidad.
+                    Finalmente analizamos la distancia que se debe recorrer desde un municipio hasta la IPS de determinado nivel de atención más cercana. Sin embargo, el nivel de complejidad solo se define para las IPS Públicas, por lo que con un modelo de Machine Learning podemos clasificar todas las IPS con los tres niveles de atención
                     '''
                 ],
                 style={
