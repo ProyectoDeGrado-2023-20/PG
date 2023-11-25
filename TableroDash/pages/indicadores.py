@@ -14,7 +14,6 @@ import json
 import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
-import polars as pl
 
 
 # -------------------------------------------------------------------------------------------------------------------
@@ -179,10 +178,15 @@ fig_mapa_numero_ips = go.Figure(
 fig_mapa_numero_ips.update_layout(
     # mapbox_style="carto-positron",
     mapbox_style="white-bg",
-    mapbox_zoom=4.7,
+    mapbox_zoom=4.4,
     mapbox_center={"lat": 4.570868, "lon": -74.2973328},
-    width=900,
-    height=900
+    width=640,
+    height=720
+)
+
+
+fig_mapa_numero_ips.update_layout(
+    title='Número de IPS por Departamento'
 )
 
 graph_mapa_numero_ips_departamento = html.Div(
@@ -237,7 +241,7 @@ fig_mapa_numero_ips_habitantes = go.Figure(
         ]*1,
 
         # ["#d05447", "#A2CDE2", "#3364C7", "#3364C7"],
-        colorbar_title="Numero IPS por cada 100 mil habitantes"
+        # colorbar_title="Numero IPS por cada 100 mil habitantes"
         # color
     )
 )
@@ -245,11 +249,17 @@ fig_mapa_numero_ips_habitantes = go.Figure(
 fig_mapa_numero_ips_habitantes.update_layout(
     # mapbox_style="carto-positron",
     mapbox_style="white-bg",
-    mapbox_zoom=4.7,
+    mapbox_zoom=4.4,
     mapbox_center={"lat": 4.570868, "lon": -74.2973328},
-    width=1000,
-    height=900
+    width=640,
+    height=720
 )
+
+
+fig_mapa_numero_ips_habitantes.update_layout(
+    title='Número IPS por cada 100 mil habitantes por Departamento'
+)
+
 
 graph_mapa_numero_ips_departamento_habitantes = html.Div(
     [
@@ -302,7 +312,7 @@ fig_mapa_numero_ips_municipios = go.Figure(
             "#011f4b",
         ]*1000,
         # ["#d05447", "#A2CDE2", "#3364C7", "#3364C7"],
-        colorbar_title="Numero IPS"
+        # colorbar_title="Numero IPS"
         # color
     )
 )
@@ -310,10 +320,15 @@ fig_mapa_numero_ips_municipios = go.Figure(
 fig_mapa_numero_ips_municipios.update_layout(
     mapbox_style="white-bg",
     # mapbox_style="carto-positron",
-    mapbox_zoom=4.3,
+    mapbox_zoom=4,
     mapbox_center={"lat": 43.5, "lon": -62.3},
-    width=900,
-    height=900
+    width=640,
+    height=800
+)
+
+
+fig_mapa_numero_ips_municipios.update_layout(
+    title='Número de IPS por Municipio'
 )
 
 graph_mapa_numero_ips_municipios = html.Div(
@@ -368,7 +383,7 @@ fig_mapa_numero_ips_habitantes_municipios = go.Figure(
         ]*10,
 
         # ["#d05447", "#A2CDE2", "#3364C7", "#3364C7"],
-        colorbar_title="Numero IPS por cada 100 mil habitantes"
+        # colorbar_title="Numero IPS por cada 100 mil habitantes"
         # color
     )
 )
@@ -376,10 +391,15 @@ fig_mapa_numero_ips_habitantes_municipios = go.Figure(
 fig_mapa_numero_ips_habitantes_municipios.update_layout(
     mapbox_style="white-bg",
     # mapbox_style="carto-positron",
-    mapbox_zoom=4.3,
+    mapbox_zoom=4,
     mapbox_center={"lat": 43.5, "lon": -62.3},
-    width=1000,
-    height=900
+    width=640,
+    height=800
+)
+
+
+fig_mapa_numero_ips_habitantes_municipios.update_layout(
+    title='Número de IPS por cada 100 mil Habitantes por Municipio'
 )
 
 graph_mapa_numero_ips_municipios_habitantes = html.Div(
@@ -541,8 +561,8 @@ graph_ips_naturaleza_juridica_porcentaje_departamento = html.Div(
 # -------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------
 
-width_mapa_distancia = 950
-width_mapa_distancia_poblacion = 1000
+width_mapa_distancia = 640
+width_mapa_distancia_poblacion = 640
 
 locations = df_mapa_distancia_ips['Municipio_Departamento']
 
@@ -575,7 +595,7 @@ fig_mapa_ips_publicas_n1 = go.Figure(
         [
             "#b62020",
         ]*1,
-        colorbar_title="Distancia a IPS Pública de Nivel 1",
+        # colorbar_title="Distancia a IPS Pública de Nivel 1",
         # zmin=0,
         # zmax=950,
     )
@@ -583,10 +603,15 @@ fig_mapa_ips_publicas_n1 = go.Figure(
 
 fig_mapa_ips_publicas_n1.update_layout(
     mapbox_style="white-bg",
-    mapbox_zoom=4.3,
+    mapbox_zoom=4,
     mapbox_center={"lat": 43.5, "lon": -62.3},
     width=width_mapa_distancia,
-    height=900,
+    height=800,
+)
+
+
+fig_mapa_ips_publicas_n1.update_layout(
+    title='Distancia a IPS Pública de Nivel 1 (Km)'
 )
 
 graph_fig_mapa_ips_publicas_n1 = html.Div(
@@ -599,99 +624,99 @@ graph_fig_mapa_ips_publicas_n1 = html.Div(
 # -------------------------------------------------------------------------------------------------------------------
 # Nivel 2
 
-fig_mapa_ips_publicas_n2 = go.Figure(
+# fig_mapa_ips_publicas_n2 = go.Figure(
 
-    go.Choroplethmapbox(
-        geojson=geojson_municipios,
-        locations=locations,
-        featureidkey='properties.key',
-        z=df_mapa_distancia_ips['Distancia_IPS_Nivel_2_Publicas'],
-        colorscale=[
-            "#fff",
-        ]*1 +
-        [
-            "#fe8181",
-        ]*1 +
-        [
-            "#fe5757",
-        ]*1 +
-        [
-            "#fe2e2e",
-        ]*1 +
-        [
-            "#cb2424",
-        ]*1 +
-        [
-            "#b62020",
-        ]*1,
-        colorbar_title="Distancia a IPS Pública de Nivel 2",
-        # zmin=0,
-        # zmax=950,
-    )
-)
+#     go.Choroplethmapbox(
+#         geojson=geojson_municipios,
+#         locations=locations,
+#         featureidkey='properties.key',
+#         z=df_mapa_distancia_ips['Distancia_IPS_Nivel_2_Publicas'],
+#         colorscale=[
+#             "#fff",
+#         ]*1 +
+#         [
+#             "#fe8181",
+#         ]*1 +
+#         [
+#             "#fe5757",
+#         ]*1 +
+#         [
+#             "#fe2e2e",
+#         ]*1 +
+#         [
+#             "#cb2424",
+#         ]*1 +
+#         [
+#             "#b62020",
+#         ]*1,
+#         colorbar_title="Distancia a IPS Pública de Nivel 2",
+#         # zmin=0,
+#         # zmax=950,
+#     )
+# )
 
-fig_mapa_ips_publicas_n2.update_layout(
-    mapbox_style="white-bg",
-    mapbox_zoom=4.3,
-    mapbox_center={"lat": 43.5, "lon": -62.3},
-    width=width_mapa_distancia,
-    height=900
-)
+# fig_mapa_ips_publicas_n2.update_layout(
+#     mapbox_style="white-bg",
+#     mapbox_zoom=4.3,
+#     mapbox_center={"lat": 43.5, "lon": -62.3},
+#     width=width_mapa_distancia,
+#     height=900
+# )
 
-graph_fig_mapa_ips_publicas_n2 = html.Div(
-    [
-        dcc.Graph(figure=fig_mapa_ips_publicas_n2)
-    ]
-)
+# graph_fig_mapa_ips_publicas_n2 = html.Div(
+#     [
+#         dcc.Graph(figure=fig_mapa_ips_publicas_n2)
+#     ]
+# )
 
 
 # -------------------------------------------------------------------------------------------------------------------
 # Nivel 3
 
-fig_mapa_ips_publicas_n3 = go.Figure(
+# fig_mapa_ips_publicas_n3 = go.Figure(
 
-    go.Choroplethmapbox(
-        geojson=geojson_municipios,
-        locations=locations,
-        featureidkey='properties.key',
-        z=df_mapa_distancia_ips['Distancia_IPS_Nivel_3_Publicas'],
-        colorscale=[
-            "#fff",
-        ]*1 +
-        [
-            "#fe8181",
-        ]*1 +
-        [
-            "#fe5757",
-        ]*1 +
-        [
-            "#fe2e2e",
-        ]*1 +
-        [
-            "#cb2424",
-        ]*1 +
-        [
-            "#b62020",
-        ]*1,
-        colorbar_title="Distancia a IPS Pública de Nivel 3",
-        # zmin=0,
-        # zmax=950,
-    )
-)
+#     go.Choroplethmapbox(
+#         geojson=geojson_municipios,
+#         locations=locations,
+#         featureidkey='properties.key',
+#         z=df_mapa_distancia_ips['Distancia_IPS_Nivel_3_Publicas'],
+#         colorscale=[
+#             "#fff",
+#         ]*1 +
+#         [
+#             "#fe8181",
+#         ]*1 +
+#         [
+#             "#fe5757",
+#         ]*1 +
+#         [
+#             "#fe2e2e",
+#         ]*1 +
+#         [
+#             "#cb2424",
+#         ]*1 +
+#         [
+#             "#b62020",
+#         ]*1,
+#         colorbar_title="Distancia a IPS Pública de Nivel 3",
+#         # zmin=0,
+#         # zmax=950,
+#     )
+# )
 
-fig_mapa_ips_publicas_n3.update_layout(
-    mapbox_style="white-bg",
-    mapbox_zoom=4.3,
-    mapbox_center={"lat": 43.5, "lon": -62.3},
-    width=width_mapa_distancia,
-    height=900
-)
+# fig_mapa_ips_publicas_n3.update_layout(
+#     mapbox_style="white-bg",
+#     mapbox_zoom=4.3,
+#     mapbox_center={"lat": 43.5, "lon": -62.3},
+#     width=width_mapa_distancia,
+#     height=900
+# )
 
-graph_fig_mapa_ips_publicas_n3 = html.Div(
-    [
-        dcc.Graph(figure=fig_mapa_ips_publicas_n3)
-    ]
-)
+# graph_fig_mapa_ips_publicas_n3 = html.Div(
+#     [
+#         dcc.Graph(figure=fig_mapa_ips_publicas_n3)
+#     ]
+# )
 
 
 # -------------------------------------------------------------------------------------------------------------------
@@ -731,7 +756,7 @@ fig_mapa_poblacion_ips_publicas_n1 = go.Figure(
         [
             "#b62020",
         ]*1,
-        colorbar_title="Distancia*Poblacion a IPS Pública de Nivel 1",
+        # colorbar_title="Distancia*Poblacion a IPS Pública de Nivel 1",
         # zmin=0,
         # zmax=115e6,
     )
@@ -739,10 +764,15 @@ fig_mapa_poblacion_ips_publicas_n1 = go.Figure(
 
 fig_mapa_poblacion_ips_publicas_n1.update_layout(
     mapbox_style="white-bg",
-    mapbox_zoom=4.3,
+    mapbox_zoom=4,
     mapbox_center={"lat": 43.5, "lon": -62.3},
     width=width_mapa_distancia_poblacion,
-    height=900
+    height=800
+)
+
+
+fig_mapa_poblacion_ips_publicas_n1.update_layout(
+    title='Distancia*Poblacion a IPS Pública de Nivel 1'
 )
 
 graph_fig_mapa_poblacion_ips_publicas_n1 = html.Div(
@@ -755,99 +785,99 @@ graph_fig_mapa_poblacion_ips_publicas_n1 = html.Div(
 # -------------------------------------------------------------------------------------------------------------------
 # Nivel 2
 
-fig_mapa_poblacion_ips_publicas_n2 = go.Figure(
+# fig_mapa_poblacion_ips_publicas_n2 = go.Figure(
 
-    go.Choroplethmapbox(
-        geojson=geojson_municipios,
-        locations=locations,
-        featureidkey='properties.key',
-        z=df_mapa_distancia_ips['Distancia_Poblacion_IPS_Nivel_2_Publicas'],
-        colorscale=[
-            "#fff",
-        ]*1 +
-        [
-            "#fe8181",
-        ]*1 +
-        [
-            "#fe5757",
-        ]*1 +
-        [
-            "#fe2e2e",
-        ]*1 +
-        [
-            "#cb2424",
-        ]*1 +
-        [
-            "#b62020",
-        ]*1,
-        colorbar_title="Distancia*Poblacion a IPS Pública de Nivel 2",
-        # zmin=0,
-        # zmax=115e6,
-    )
-)
+#     go.Choroplethmapbox(
+#         geojson=geojson_municipios,
+#         locations=locations,
+#         featureidkey='properties.key',
+#         z=df_mapa_distancia_ips['Distancia_Poblacion_IPS_Nivel_2_Publicas'],
+#         colorscale=[
+#             "#fff",
+#         ]*1 +
+#         [
+#             "#fe8181",
+#         ]*1 +
+#         [
+#             "#fe5757",
+#         ]*1 +
+#         [
+#             "#fe2e2e",
+#         ]*1 +
+#         [
+#             "#cb2424",
+#         ]*1 +
+#         [
+#             "#b62020",
+#         ]*1,
+#         colorbar_title="Distancia*Poblacion a IPS Pública de Nivel 2",
+#         # zmin=0,
+#         # zmax=115e6,
+#     )
+# )
 
-fig_mapa_poblacion_ips_publicas_n2.update_layout(
-    mapbox_style="white-bg",
-    mapbox_zoom=4.3,
-    mapbox_center={"lat": 43.5, "lon": -62.3},
-    width=width_mapa_distancia_poblacion,
-    height=900
-)
+# fig_mapa_poblacion_ips_publicas_n2.update_layout(
+#     mapbox_style="white-bg",
+#     mapbox_zoom=4.3,
+#     mapbox_center={"lat": 43.5, "lon": -62.3},
+#     width=width_mapa_distancia_poblacion,
+#     height=900
+# )
 
-graph_fig_mapa_poblacion_ips_publicas_n2 = html.Div(
-    [
-        dcc.Graph(figure=fig_mapa_poblacion_ips_publicas_n2)
-    ]
-)
+# graph_fig_mapa_poblacion_ips_publicas_n2 = html.Div(
+#     [
+#         dcc.Graph(figure=fig_mapa_poblacion_ips_publicas_n2)
+#     ]
+# )
 
 
 # -------------------------------------------------------------------------------------------------------------------
 # Nivel 3
 
-fig_mapa_poblacion_ips_publicas_n3 = go.Figure(
+# fig_mapa_poblacion_ips_publicas_n3 = go.Figure(
 
-    go.Choroplethmapbox(
-        geojson=geojson_municipios,
-        locations=locations,
-        featureidkey='properties.key',
-        z=df_mapa_distancia_ips['Distancia_Poblacion_IPS_Nivel_3_Publicas'],
-        colorscale=[
-            "#fff",
-        ]*1 +
-        [
-            "#fe8181",
-        ]*1 +
-        [
-            "#fe5757",
-        ]*1 +
-        [
-            "#fe2e2e",
-        ]*1 +
-        [
-            "#cb2424",
-        ]*1 +
-        [
-            "#b62020",
-        ]*1,
-        colorbar_title="Distancia*Poblacion a IPS Pública de Nivel 3",
-        # zmin=0,
-        # zmax=115e6,
-    )
-)
+#     go.Choroplethmapbox(
+#         geojson=geojson_municipios,
+#         locations=locations,
+#         featureidkey='properties.key',
+#         z=df_mapa_distancia_ips['Distancia_Poblacion_IPS_Nivel_3_Publicas'],
+#         colorscale=[
+#             "#fff",
+#         ]*1 +
+#         [
+#             "#fe8181",
+#         ]*1 +
+#         [
+#             "#fe5757",
+#         ]*1 +
+#         [
+#             "#fe2e2e",
+#         ]*1 +
+#         [
+#             "#cb2424",
+#         ]*1 +
+#         [
+#             "#b62020",
+#         ]*1,
+#         colorbar_title="Distancia*Poblacion a IPS Pública de Nivel 3",
+#         # zmin=0,
+#         # zmax=115e6,
+#     )
+# )
 
-fig_mapa_poblacion_ips_publicas_n3.update_layout(
-    mapbox_style="white-bg",
-    mapbox_zoom=4.3,
-    mapbox_center={"lat": 43.5, "lon": -62.3},
-    width=width_mapa_distancia_poblacion,
-    height=900
-)
+# fig_mapa_poblacion_ips_publicas_n3.update_layout(
+#     mapbox_style="white-bg",
+#     mapbox_zoom=4.3,
+#     mapbox_center={"lat": 43.5, "lon": -62.3},
+#     width=width_mapa_distancia_poblacion,
+#     height=900
+# )
 
-graph_fig_mapa_poblacion_ips_publicas_n3 = html.Div(
-    [
-        dcc.Graph(figure=fig_mapa_poblacion_ips_publicas_n3)
-    ]
-)
+# graph_fig_mapa_poblacion_ips_publicas_n3 = html.Div(
+#     [
+#         dcc.Graph(figure=fig_mapa_poblacion_ips_publicas_n3)
+#     ]
+# )
 
 
 # -------------------------------------------------------------------------------------------------------------------
@@ -865,148 +895,148 @@ locations = df_mapa_distancia_ips['Municipio_Departamento']
 # -------------------------------------------------------------------------------------------------------------------
 # Nivel 1
 
-fig_mapa_ips_n1 = go.Figure(
+# fig_mapa_ips_n1 = go.Figure(
 
-    go.Choroplethmapbox(
-        geojson=geojson_municipios,
-        locations=locations,
-        featureidkey='properties.key',
-        z=df_mapa_distancia_ips['Distancia_IPS_Nivel_1_Modelo'],
-        colorscale=[
-            "#fff",
-        ]*1 +
-        [
-            "#fe8181",
-        ]*1 +
-        [
-            "#fe5757",
-        ]*1 +
-        [
-            "#fe2e2e",
-        ]*1 +
-        [
-            "#cb2424",
-        ]*1 +
-        [
-            "#b62020",
-        ]*1,
-        colorbar_title="Distancia a IPS de Nivel 1",
-        # zmin=0,
-        # zmax=950,
-    )
-)
+#     go.Choroplethmapbox(
+#         geojson=geojson_municipios,
+#         locations=locations,
+#         featureidkey='properties.key',
+#         z=df_mapa_distancia_ips['Distancia_IPS_Nivel_1_Modelo'],
+#         colorscale=[
+#             "#fff",
+#         ]*1 +
+#         [
+#             "#fe8181",
+#         ]*1 +
+#         [
+#             "#fe5757",
+#         ]*1 +
+#         [
+#             "#fe2e2e",
+#         ]*1 +
+#         [
+#             "#cb2424",
+#         ]*1 +
+#         [
+#             "#b62020",
+#         ]*1,
+#         colorbar_title="Distancia a IPS de Nivel 1",
+#         # zmin=0,
+#         # zmax=950,
+#     )
+# )
 
-fig_mapa_ips_n1.update_layout(
-    mapbox_style="white-bg",
-    mapbox_zoom=4.3,
-    mapbox_center={"lat": 43.5, "lon": -62.3},
-    width=width_mapa_distancia,
-    height=900,
-)
+# fig_mapa_ips_n1.update_layout(
+#     mapbox_style="white-bg",
+#     mapbox_zoom=4.3,
+#     mapbox_center={"lat": 43.5, "lon": -62.3},
+#     width=width_mapa_distancia,
+#     height=900,
+# )
 
-graph_fig_mapa_ips_n1 = html.Div(
-    [
-        dcc.Graph(figure=fig_mapa_ips_n1)
-    ]
-)
+# graph_fig_mapa_ips_n1 = html.Div(
+#     [
+#         dcc.Graph(figure=fig_mapa_ips_n1)
+#     ]
+# )
 
 
 # -------------------------------------------------------------------------------------------------------------------
 # Nivel 2
 
-fig_mapa_ips_n2 = go.Figure(
+# fig_mapa_ips_n2 = go.Figure(
 
-    go.Choroplethmapbox(
-        geojson=geojson_municipios,
-        locations=locations,
-        featureidkey='properties.key',
-        z=df_mapa_distancia_ips['Distancia_IPS_Nivel_2_Modelo'],
-        colorscale=[
-            "#fff",
-        ]*1 +
-        [
-            "#fe8181",
-        ]*1 +
-        [
-            "#fe5757",
-        ]*1 +
-        [
-            "#fe2e2e",
-        ]*1 +
-        [
-            "#cb2424",
-        ]*1 +
-        [
-            "#b62020",
-        ]*1,
-        colorbar_title="Distancia a IPS de Nivel 2",
-        # zmin=0,
-        # zmax=950,
-    )
-)
+#     go.Choroplethmapbox(
+#         geojson=geojson_municipios,
+#         locations=locations,
+#         featureidkey='properties.key',
+#         z=df_mapa_distancia_ips['Distancia_IPS_Nivel_2_Modelo'],
+#         colorscale=[
+#             "#fff",
+#         ]*1 +
+#         [
+#             "#fe8181",
+#         ]*1 +
+#         [
+#             "#fe5757",
+#         ]*1 +
+#         [
+#             "#fe2e2e",
+#         ]*1 +
+#         [
+#             "#cb2424",
+#         ]*1 +
+#         [
+#             "#b62020",
+#         ]*1,
+#         colorbar_title="Distancia a IPS de Nivel 2",
+#         # zmin=0,
+#         # zmax=950,
+#     )
+# )
 
-fig_mapa_ips_n2.update_layout(
-    mapbox_style="white-bg",
-    mapbox_zoom=4.3,
-    mapbox_center={"lat": 43.5, "lon": -62.3},
-    width=width_mapa_distancia,
-    height=900
-)
+# fig_mapa_ips_n2.update_layout(
+#     mapbox_style="white-bg",
+#     mapbox_zoom=4.3,
+#     mapbox_center={"lat": 43.5, "lon": -62.3},
+#     width=width_mapa_distancia,
+#     height=900
+# )
 
-graph_fig_mapa_ips_n2 = html.Div(
-    [
-        dcc.Graph(figure=fig_mapa_ips_n2)
-    ]
-)
+# graph_fig_mapa_ips_n2 = html.Div(
+#     [
+#         dcc.Graph(figure=fig_mapa_ips_n2)
+#     ]
+# )
 
 
 # -------------------------------------------------------------------------------------------------------------------
 # Nivel 3
 
-fig_mapa_ips_n3 = go.Figure(
+# fig_mapa_ips_n3 = go.Figure(
 
-    go.Choroplethmapbox(
-        geojson=geojson_municipios,
-        locations=locations,
-        featureidkey='properties.key',
-        z=df_mapa_distancia_ips['Distancia_IPS_Nivel_3_Modelo'],
-        colorscale=[
-            "#fff",
-        ]*1 +
-        [
-            "#fe8181",
-        ]*1 +
-        [
-            "#fe5757",
-        ]*1 +
-        [
-            "#fe2e2e",
-        ]*1 +
-        [
-            "#cb2424",
-        ]*1 +
-        [
-            "#b62020",
-        ]*1,
-        colorbar_title="Distancia a IPS de Nivel 3",
-        # zmin=0,
-        # zmax=950,
-    )
-)
+#     go.Choroplethmapbox(
+#         geojson=geojson_municipios,
+#         locations=locations,
+#         featureidkey='properties.key',
+#         z=df_mapa_distancia_ips['Distancia_IPS_Nivel_3_Modelo'],
+#         colorscale=[
+#             "#fff",
+#         ]*1 +
+#         [
+#             "#fe8181",
+#         ]*1 +
+#         [
+#             "#fe5757",
+#         ]*1 +
+#         [
+#             "#fe2e2e",
+#         ]*1 +
+#         [
+#             "#cb2424",
+#         ]*1 +
+#         [
+#             "#b62020",
+#         ]*1,
+#         colorbar_title="Distancia a IPS de Nivel 3",
+#         # zmin=0,
+#         # zmax=950,
+#     )
+# )
 
-fig_mapa_ips_n3.update_layout(
-    mapbox_style="white-bg",
-    mapbox_zoom=4.3,
-    mapbox_center={"lat": 43.5, "lon": -62.3},
-    width=width_mapa_distancia,
-    height=900
-)
+# fig_mapa_ips_n3.update_layout(
+#     mapbox_style="white-bg",
+#     mapbox_zoom=4.3,
+#     mapbox_center={"lat": 43.5, "lon": -62.3},
+#     width=width_mapa_distancia,
+#     height=900
+# )
 
-graph_fig_mapa_ips_n3 = html.Div(
-    [
-        dcc.Graph(figure=fig_mapa_ips_n3)
-    ]
-)
+# graph_fig_mapa_ips_n3 = html.Div(
+#     [
+#         dcc.Graph(figure=fig_mapa_ips_n3)
+#     ]
+# )
 
 
 # -------------------------------------------------------------------------------------------------------------------
@@ -1021,148 +1051,148 @@ locations = df_mapa_distancia_ips['Municipio_Departamento']
 # -------------------------------------------------------------------------------------------------------------------
 # Nivel 1
 
-fig_mapa_poblacion_ips_n1 = go.Figure(
+# fig_mapa_poblacion_ips_n1 = go.Figure(
 
-    go.Choroplethmapbox(
-        geojson=geojson_municipios,
-        locations=locations,
-        featureidkey='properties.key',
-        z=df_mapa_distancia_ips['Distancia_Poblacion_IPS_Nivel_1_Modelo'],
-        colorscale=[
-            "#fff",
-        ]*1 +
-        [
-            "#fe8181",
-        ]*1 +
-        [
-            "#fe5757",
-        ]*1 +
-        [
-            "#fe2e2e",
-        ]*1 +
-        [
-            "#cb2424",
-        ]*1 +
-        [
-            "#b62020",
-        ]*1,
-        colorbar_title="Distancia*Poblacion a IPS de Nivel 1",
-        # zmin=0,
-        # zmax=115e6,
-    )
-)
+#     go.Choroplethmapbox(
+#         geojson=geojson_municipios,
+#         locations=locations,
+#         featureidkey='properties.key',
+#         z=df_mapa_distancia_ips['Distancia_Poblacion_IPS_Nivel_1_Modelo'],
+#         colorscale=[
+#             "#fff",
+#         ]*1 +
+#         [
+#             "#fe8181",
+#         ]*1 +
+#         [
+#             "#fe5757",
+#         ]*1 +
+#         [
+#             "#fe2e2e",
+#         ]*1 +
+#         [
+#             "#cb2424",
+#         ]*1 +
+#         [
+#             "#b62020",
+#         ]*1,
+#         colorbar_title="Distancia*Poblacion a IPS de Nivel 1",
+#         # zmin=0,
+#         # zmax=115e6,
+#     )
+# )
 
-fig_mapa_poblacion_ips_n1.update_layout(
-    mapbox_style="white-bg",
-    mapbox_zoom=4.3,
-    mapbox_center={"lat": 43.5, "lon": -62.3},
-    width=width_mapa_distancia_poblacion,
-    height=900
-)
+# fig_mapa_poblacion_ips_n1.update_layout(
+#     mapbox_style="white-bg",
+#     mapbox_zoom=4.3,
+#     mapbox_center={"lat": 43.5, "lon": -62.3},
+#     width=width_mapa_distancia_poblacion,
+#     height=900
+# )
 
-graph_fig_mapa_poblacion_ips_n1 = html.Div(
-    [
-        dcc.Graph(figure=fig_mapa_poblacion_ips_n1)
-    ]
-)
+# graph_fig_mapa_poblacion_ips_n1 = html.Div(
+#     [
+#         dcc.Graph(figure=fig_mapa_poblacion_ips_n1)
+#     ]
+# )
 
 
 # -------------------------------------------------------------------------------------------------------------------
 # Nivel 2
 
-fig_mapa_poblacion_ips_n2 = go.Figure(
+# fig_mapa_poblacion_ips_n2 = go.Figure(
 
-    go.Choroplethmapbox(
-        geojson=geojson_municipios,
-        locations=locations,
-        featureidkey='properties.key',
-        z=df_mapa_distancia_ips['Distancia_Poblacion_IPS_Nivel_2_Modelo'],
-        colorscale=[
-            "#fff",
-        ]*1 +
-        [
-            "#fe8181",
-        ]*1 +
-        [
-            "#fe5757",
-        ]*1 +
-        [
-            "#fe2e2e",
-        ]*1 +
-        [
-            "#cb2424",
-        ]*1 +
-        [
-            "#b62020",
-        ]*1,
-        colorbar_title="Distancia*Poblacion a IPS de Nivel 2",
-        # zmin=0,
-        # zmax=115e6,
-    )
-)
+#     go.Choroplethmapbox(
+#         geojson=geojson_municipios,
+#         locations=locations,
+#         featureidkey='properties.key',
+#         z=df_mapa_distancia_ips['Distancia_Poblacion_IPS_Nivel_2_Modelo'],
+#         colorscale=[
+#             "#fff",
+#         ]*1 +
+#         [
+#             "#fe8181",
+#         ]*1 +
+#         [
+#             "#fe5757",
+#         ]*1 +
+#         [
+#             "#fe2e2e",
+#         ]*1 +
+#         [
+#             "#cb2424",
+#         ]*1 +
+#         [
+#             "#b62020",
+#         ]*1,
+#         colorbar_title="Distancia*Poblacion a IPS de Nivel 2",
+#         # zmin=0,
+#         # zmax=115e6,
+#     )
+# )
 
-fig_mapa_poblacion_ips_n2.update_layout(
-    mapbox_style="white-bg",
-    mapbox_zoom=4.3,
-    mapbox_center={"lat": 43.5, "lon": -62.3},
-    width=width_mapa_distancia_poblacion,
-    height=900
-)
+# fig_mapa_poblacion_ips_n2.update_layout(
+#     mapbox_style="white-bg",
+#     mapbox_zoom=4.3,
+#     mapbox_center={"lat": 43.5, "lon": -62.3},
+#     width=width_mapa_distancia_poblacion,
+#     height=900
+# )
 
-graph_fig_mapa_poblacion_ips_n2 = html.Div(
-    [
-        dcc.Graph(figure=fig_mapa_poblacion_ips_n2)
-    ]
-)
+# graph_fig_mapa_poblacion_ips_n2 = html.Div(
+#     [
+#         dcc.Graph(figure=fig_mapa_poblacion_ips_n2)
+#     ]
+# )
 
 
 # -------------------------------------------------------------------------------------------------------------------
 # Nivel 3
 
-fig_mapa_poblacion_ips_n3 = go.Figure(
+# fig_mapa_poblacion_ips_n3 = go.Figure(
 
-    go.Choroplethmapbox(
-        geojson=geojson_municipios,
-        locations=locations,
-        featureidkey='properties.key',
-        z=df_mapa_distancia_ips['Distancia_Poblacion_IPS_Nivel_3_Modelo'],
-        colorscale=[
-            "#fff",
-        ]*1 +
-        [
-            "#fe8181",
-        ]*1 +
-        [
-            "#fe5757",
-        ]*1 +
-        [
-            "#fe2e2e",
-        ]*1 +
-        [
-            "#cb2424",
-        ]*1 +
-        [
-            "#b62020",
-        ]*1,
-        colorbar_title="Distancia*Poblacion a IPS de Nivel 3",
-        # zmin=0,
-        # zmax=115e6,
-    )
-)
+#     go.Choroplethmapbox(
+#         geojson=geojson_municipios,
+#         locations=locations,
+#         featureidkey='properties.key',
+#         z=df_mapa_distancia_ips['Distancia_Poblacion_IPS_Nivel_3_Modelo'],
+#         colorscale=[
+#             "#fff",
+#         ]*1 +
+#         [
+#             "#fe8181",
+#         ]*1 +
+#         [
+#             "#fe5757",
+#         ]*1 +
+#         [
+#             "#fe2e2e",
+#         ]*1 +
+#         [
+#             "#cb2424",
+#         ]*1 +
+#         [
+#             "#b62020",
+#         ]*1,
+#         colorbar_title="Distancia*Poblacion a IPS de Nivel 3",
+#         # zmin=0,
+#         # zmax=115e6,
+#     )
+# )
 
-fig_mapa_poblacion_ips_n3.update_layout(
-    mapbox_style="white-bg",
-    mapbox_zoom=4.3,
-    mapbox_center={"lat": 43.5, "lon": -62.3},
-    width=width_mapa_distancia_poblacion,
-    height=900
-)
+# fig_mapa_poblacion_ips_n3.update_layout(
+#     mapbox_style="white-bg",
+#     mapbox_zoom=4.3,
+#     mapbox_center={"lat": 43.5, "lon": -62.3},
+#     width=width_mapa_distancia_poblacion,
+#     height=900
+# )
 
-graph_fig_mapa_poblacion_ips_n3 = html.Div(
-    [
-        dcc.Graph(figure=fig_mapa_poblacion_ips_n3)
-    ]
-)
+# graph_fig_mapa_poblacion_ips_n3 = html.Div(
+#     [
+#         dcc.Graph(figure=fig_mapa_poblacion_ips_n3)
+#     ]
+# )
 
 
 # -------------------------------------------------------------------------------------------------------------------
@@ -1587,7 +1617,7 @@ indicadores_layout = html.Div(children=[
                     html.H5(
                         'Distancia a IPS Pública de Nivel 2'
                     ),
-                    graph_fig_mapa_ips_publicas_n2,
+                    # graph_fig_mapa_ips_publicas_n2,
                 ],
                 style={
                     'display': 'flex',
@@ -1601,7 +1631,7 @@ indicadores_layout = html.Div(children=[
                     html.H5(
                         'Distancia Ponderada por Población a IPS Pública de Nivel 2'
                     ),
-                    graph_fig_mapa_poblacion_ips_publicas_n2,
+                    # graph_fig_mapa_poblacion_ips_publicas_n2,
                 ],
                 style={
                     'display': 'flex',
@@ -1629,7 +1659,7 @@ indicadores_layout = html.Div(children=[
                     html.H5(
                         'Distancia a IPS Pública de Nivel 3'
                     ),
-                    graph_fig_mapa_ips_publicas_n3,
+                    # graph_fig_mapa_ips_publicas_n3,
                 ],
                 style={
                     'display': 'flex',
@@ -1643,7 +1673,7 @@ indicadores_layout = html.Div(children=[
                     html.H5(
                         'Distancia Ponderada por Población a IPS Pública de Nivel 3'
                     ),
-                    graph_fig_mapa_poblacion_ips_publicas_n3,
+                    # graph_fig_mapa_poblacion_ips_publicas_n3,
                 ],
                 style={
                     'display': 'flex',
@@ -1745,7 +1775,7 @@ indicadores_layout = html.Div(children=[
                     html.H5(
                         'Distancia a IPS de Nivel 1'
                     ),
-                    graph_fig_mapa_ips_n1,
+                    # graph_fig_mapa_ips_n1,
                 ],
                 style={
                     'display': 'flex',
@@ -1759,7 +1789,7 @@ indicadores_layout = html.Div(children=[
                     html.H5(
                         'Distancia Ponderada por Población a IPS de Nivel 1'
                     ),
-                    graph_fig_mapa_poblacion_ips_n1,
+                    # graph_fig_mapa_poblacion_ips_n1,
                 ],
                 style={
                     'display': 'flex',
@@ -1787,7 +1817,7 @@ indicadores_layout = html.Div(children=[
                     html.H5(
                         'Distancia a IPS de Nivel 2'
                     ),
-                    graph_fig_mapa_ips_n2,
+                    # graph_fig_mapa_ips_n2,
                 ],
                 style={
                     'display': 'flex',
@@ -1801,7 +1831,7 @@ indicadores_layout = html.Div(children=[
                     html.H5(
                         'Distancia Ponderada por Población a IPS de Nivel 2'
                     ),
-                    graph_fig_mapa_poblacion_ips_n2,
+                    # graph_fig_mapa_poblacion_ips_n2,
                 ],
                 style={
                     'display': 'flex',
@@ -1829,7 +1859,7 @@ indicadores_layout = html.Div(children=[
                     html.H5(
                         'Distancia a IPS de Nivel 3'
                     ),
-                    graph_fig_mapa_ips_n3,
+                    # graph_fig_mapa_ips_n3,
                 ],
                 style={
                     'display': 'flex',
@@ -1843,7 +1873,7 @@ indicadores_layout = html.Div(children=[
                     html.H5(
                         'Distancia Ponderada por Población a IPS de Nivel 3'
                     ),
-                    graph_fig_mapa_poblacion_ips_n3,
+                    # graph_fig_mapa_poblacion_ips_n3,
                 ],
                 style={
                     'display': 'flex',
