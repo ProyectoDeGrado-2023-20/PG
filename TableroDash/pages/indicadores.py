@@ -9,7 +9,7 @@ from apps import navigation
 from dash import dcc
 from dash import html
 from dash.dependencies import Input, Output
-import dash_bootstrap_components as dbc
+# import dash_bootstrap_components as dbc
 import json
 import plotly.express as px
 import plotly.graph_objects as go
@@ -23,40 +23,41 @@ import pandas as pd
 # -------------------------------------------------------------------------------------------------------------------
 
 # Datos de Numero IPS - Departamentos
-df_ips_por_departamentos = pd.read_csv('./Data/IPS_por_Departamentos_2022.csv')
+df_ips_por_departamentos = pd.read_csv(
+    'TableroDash/Data/IPS_por_Departamentos_2022.csv')
 
 # Datos de los Mapas de Numero IPS - Departamentos
-df_mapa_numero_ips = pd.read_csv('./Data/Mapa_Numero_IPS.csv')
+df_mapa_numero_ips = pd.read_csv('TableroDash/Data/Mapa_Numero_IPS.csv')
 
 # Datos de Numero IPS - Municipios
 df_ips_por_departamentos_habitantes = pd.read_csv(
-    './Data/IPS_por_Departamentos_Habitantes_2022.csv')
+    'TableroDash/Data/IPS_por_Departamentos_Habitantes_2022.csv')
 
 # Datos de los Mapas de Numero IPS - Municipios
 df_mapa_numero_ips_municipios = pd.read_csv(
-    './Data/Mapa_Numero_IPS_Municipios.csv')
+    'TableroDash/Data/Mapa_Numero_IPS_Municipios.csv')
 
 # Datos de Distribucion Naturaleza Juridica Nacional
 df_ips_naturaleza_juridica = pd.read_csv(
-    './Data/Naturaleza_Juridica_Nacional.csv')
+    'TableroDash/Data/Naturaleza_Juridica_Nacional.csv')
 df_ips_naturaleza_juridica['Category'] = ''
 
 # Datos de Distribucion Naturaleza Juridica por Departamento
 df_naturaleza_juridica_departamento = pd.read_csv(
-    './Data/Naturaleza_Juridica_Departamento.csv')
+    'TableroDash/Data/Naturaleza_Juridica_Departamento.csv')
 
 # Geojson para mapas Departamentos
-file_path = './Data/Colombia_Departamentos_Modified.json'
+file_path = 'TableroDash/Data/Colombia_Departamentos_Modified.json'
 with open(file_path, 'r') as file:
     geojson_departamentos = json.load(file)
 
 # Geojson para Mapas Municipios
-file_path = './Data/Colombia_Municipios_Modified.json'
+file_path = 'TableroDash/Data/Colombia_Municipios_Modified.json'
 with open(file_path, 'r') as file:
     geojson_municipios = json.load(file)
 
 # Datos de los Mapas de Distancias IPS Publicas
-df_mapa_distancia_ips = pd.read_csv('./Data/Mapa_Distancia_IPS.csv')
+df_mapa_distancia_ips = pd.read_csv('TableroDash/Data/Mapa_Distancia_IPS.csv')
 
 
 # -------------------------------------------------------------------------------------------------------------------
@@ -424,6 +425,7 @@ colorscale = ["#fff",
                                           ]*1 + ["#b62020",
                                                  ]*1
 
+
 # -------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------
 # Layout
@@ -435,6 +437,7 @@ indicadores_layout = html.Div(children=[
     # -------------------------------------------------------------------------------------------------------------------
     # Barra de Navegación
     # -------------------------------------------------------------------------------------------------------------------
+
     navigation.navbar,
 
     html.Br(),
@@ -860,12 +863,12 @@ indicadores_layout = html.Div(children=[
     ),
 ])
 
+
 # -------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------
 # Callback
 # -------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------
-
 
 @app.callback(
     [
@@ -907,7 +910,7 @@ def actualizar_grafica(tipo_ips, nivel_ips):
         colorscale,
         4,
         640,
-        f'Distancia Ponderada por Población a IPS{show} de Nivel 1 (Km)'
+        f'Distancia Ponderada por Población a IPS{show} de Nivel {nivel_ips} (Km)'
     )
 
     return graph_mapa_distancia_ips, graph_mapa_poblacion_ips

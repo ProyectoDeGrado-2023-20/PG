@@ -9,15 +9,11 @@ from apps import navigation
 from dash import dcc
 from dash import html
 from dash.dependencies import Input, Output
-# from dotenv import dotenv_values
-import pandas as pd
-# import dash_core_components as dcc
-# import dash_html_components as html
-from dash import dcc
-from dash import html
-import plotly.express as px
-import plotly.graph_objects as go
 import dash_bootstrap_components as dbc
+import pandas as pd
+import plotly.express as px
+# import plotly.graph_objects as go
+
 
 # -------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------
@@ -25,7 +21,7 @@ import dash_bootstrap_components as dbc
 # -------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------
 
-df = pd.read_csv('./Data/Capacidad_Instalada_Transformed.csv')
+df = pd.read_csv('TableroDash/Data/Capacidad_Instalada_Poblacion.csv')
 
 departamentos = list(df['Departamento'].unique())
 
@@ -39,12 +35,12 @@ capacidad = [
     'Salas de quirófanos'
 ]
 
+
 # -------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------
 # Sidebar
 # -------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------
-
 
 sidebar = html.Div(
     children=[
@@ -58,7 +54,8 @@ sidebar = html.Div(
         dcc.Dropdown(
             id='capacidad-dropdown',
             options=[{'label': opt, 'value': opt} for opt in capacidad],
-            value=capacidad[0]
+            value=capacidad[0],
+            multi=True,
         )
     ])
 
@@ -71,7 +68,7 @@ sidebar = html.Div(
 
 graph = html.Div(
     [
-        dcc.Graph(id='grafica_capacidad', figure=px.line())
+        dcc.Graph(id='grafica_capacidad')
     ]
 )
 
@@ -83,23 +80,97 @@ graph = html.Div(
 
 capacidad_layout = html.Div(
     children=[
+
         # Barra de Navegación
         navigation.navbar,
 
         html.Br(),
 
+        # Contenedor
         dbc.Container(
-            [
+            children=[
                 dbc.Row(
-                    [
-                        dbc.Col(sidebar, width=3, className='bg-light'),
-                        dbc.Col(graph, width=9)
+                    children=[
+
+
+                        # ---------------------------------------------------------
+                        # Dropdowns
+                        # ---------------------------------------------------------
+
+                        dbc.Col(
+                            children=[
+                                html.Div(
+                                    children=[
+
+
+                                        # ---------------------------------------------------------
+                                        # Dropdown Departamentos
+                                        # ---------------------------------------------------------
+
+                                        html.Label(
+                                            'Selecciona un departamento:'
+                                        ),
+                                        dcc.Dropdown(
+                                            id='dropdown-departamento',
+                                            options=[{'label': d, 'value': d}
+                                                     for d in departamentos],
+                                            value='Nacional',
+                                            multi=True,
+                                            # clearable=False,
+                                        ),
+
+
+                                        # ---------------------------------------------------------
+                                        # Dropdown Capacidades
+                                        # ---------------------------------------------------------
+
+                                        html.Label(
+                                            'Selecciona una opción para la gráfica:'
+                                        ),
+                                        dcc.Dropdown(
+                                            id='dropdown-capacidad',
+                                            options=[{'label': opt, 'value': opt}
+                                                     for opt in capacidad],
+                                            value=capacidad[0],
+                                            # multi=True,
+                                            clearable=False,
+                                        ),
+                                    ],
+                                ),
+                            ],
+                            width=3,
+                            className='bg-light',
+                        ),
+
+
+                        # ---------------------------------------------------------
+                        # Graficos
+                        # ---------------------------------------------------------
+
+                        dbc.Col(
+                            children=[
+                                html.Div(
+                                    children=[
+                                        dcc.Graph(id='graph-capacidad-bruta')
+                                    ]
+                                ),
+                                html.Div(
+                                    children=[
+                                        dcc.Graph(
+                                            id='graph-capacidad-poblacion')
+                                    ]
+                                ),
+                            ],
+                            width=9,
+                        ),
                     ],
-                    style={"height": "100vh"}
+                    style={
+                        "height": "100vh",
+                    },
                 ),
             ],
-            fluid=True
-        )
+            fluid=True,
+        ),
     ])
 
 
@@ -110,21 +181,70 @@ capacidad_layout = html.Div(
 # -------------------------------------------------------------------------------------------------------------------
 
 @app.callback(
-    Output('grafica_capacidad', 'figure'),
-    [Input('departamento-dropdown', 'value'),
-     Input('capacidad-dropdown', 'value')]
+    [
+        Output('graph-capacidad-bruta', 'figure'),
+        Output('graph-capacidad-poblacion', 'figure'),
+    ],
+    [
+        Input('dropdown-departamento', 'value'),
+        Input('dropdown-capacidad', 'value'),
+    ],
 )
-def actualizar_grafica(departamento, opcion_grafica):
+def actualizar_grafica(departamento, capacidad):
 
-    fig = px.line(
-        df[df['Departamento'] == departamento],
+    if isinstance(departamento, str):
+        departamento = [departamento]
+
+    # -------------------------------------------------------------------------------------------------------------------
+    # Grafica Capacidad Instalada
+    # -------------------------------------------------------------------------------------------------------------------
+
+    max_graph_capacidad_bruta = df[df['Departamento'].isin(
+        departamento)][capacidad].max()
+    sd_graph_capacidad_bruta = df[df['Departamento'].isin(
+        departamento)][capacidad].std()
+
+    graph_capacidad_bruta = px.line(
+        data_frame=df[df['Departamento'].isin(departamento)],
         x='Anio',
-        y=opcion_grafica,
+        y=capacidad,
         color='Departamento',
-        # ylim=(0, df[opcion_grafica].max())
+        range_y=[0, max_graph_capacidad_bruta + sd_graph_capacidad_bruta],
+        title=f'{capacidad} por Departamento de 2002 a 2022'
     )
 
-    fig.update_yaxes(
-        range=[0, df[opcion_grafica].max() + df[opcion_grafica].std()])
+    graph_capacidad_bruta.update_layout(
+        xaxis_title='Año',
+        yaxis_title=capacidad,
+    )
 
-    return fig
+    # -------------------------------------------------------------------------------------------------------------------
+    # Grafica Capacidad Instalada por cada 100 mil Habitantes
+    # -------------------------------------------------------------------------------------------------------------------
+
+    max_graph_capacidad_poblacion = df[df['Departamento'].isin(
+        departamento)][f'{capacidad}/Habitantes'].max()
+    sd_graph_capacidad_poblacion = df[df['Departamento'].isin(
+        departamento)][f'{capacidad}/Habitantes'].std()
+
+    graph_capacidad_poblacion = px.line(
+        data_frame=df[df['Departamento'].isin(departamento)],
+        x='Anio',
+        y=f'{capacidad}/Habitantes',
+        color='Departamento',
+        range_y=[0, max_graph_capacidad_poblacion +
+                 sd_graph_capacidad_poblacion],
+        title=f'{capacidad} por cada 100 mil Habitantes por Departamento de 2002 a 2022'
+    )
+
+    graph_capacidad_poblacion.update_layout(
+        xaxis_title='Año',
+        yaxis_title=dict(
+            text=f'{capacidad} cada 100 mil Habitantes',
+            font=dict(
+                size=12
+            ),
+        )
+    )
+
+    return graph_capacidad_bruta, graph_capacidad_poblacion
