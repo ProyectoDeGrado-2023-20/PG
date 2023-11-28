@@ -724,7 +724,7 @@ indicadores_layout = html.Div(children=[
             html.P(
                 children=[
                     '''
-                    Finalmente analizamos la distancia que se debe recorrer desde un municipio hasta la IPS de determinado nivel de atención más cercana. Sin embargo, el nivel de complejidad solo se define para las IPS Públicas, por lo que con un modelo de Machine Learning podemos clasificar todas las IPS con los tres niveles de atención
+                    Finalmente analizamos la distancia que se debe recorrer desde un municipio hasta la IPS de determinado nivel de atención más cercana. Sin embargo, el nivel de complejidad solo se define para las IPS Públicas, por lo que con un modelo de Machine Learning podemos clasificar todas las IPS con los tres niveles de atención.
                     '''
                 ],
                 style={
@@ -882,8 +882,8 @@ indicadores_layout = html.Div(children=[
 )
 def actualizar_grafica(tipo_ips, nivel_ips):
 
-    if tipo_ips == 'Publica':
-        show = ' Pública '
+    if tipo_ips == 'Publicas':
+        show = ' Pública'
     else:
         show = ''
 
