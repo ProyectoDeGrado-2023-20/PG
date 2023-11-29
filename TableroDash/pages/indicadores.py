@@ -374,7 +374,7 @@ colorscale = ["#b62020",
                                                                 ]*10
 
 graph_mapa_numero_ips_municipios_habitantes = graph_mapa_ips_municipio(
-    geojson_municipios, df_mapa_numero_ips_municipios, 'Municipio_Departamento', 'IPS/Habitantes', colorscale, 'Número de IPS por Municipio', 4, 640)
+    geojson_municipios, df_mapa_numero_ips_municipios, 'Municipio_Departamento', 'IPS/Habitantes', colorscale, 'Número de IPS por cada 100 mil Habitantes por Municipio', 4, 640)
 
 
 # -------------------------------------------------------------------------------------------------------------------
