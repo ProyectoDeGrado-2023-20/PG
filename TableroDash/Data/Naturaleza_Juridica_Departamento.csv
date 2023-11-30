@@ -1,0 +1,100 @@
+,Departamento,NaturalezaJuridica,Numero_IPS,Porcentaje_IPS
+0,Vichada,Mixta,0.0,0.0
+1,Vichada,Privada,8.0,66.67
+2,Vichada,Pública,4.0,33.33
+3,Guainía,Mixta,1.0,8.33
+4,Guainía,Privada,6.0,50.0
+5,Guainía,Pública,5.0,41.67
+6,San Andrés y Providencia,Mixta,0.0,0.0
+7,San Andrés y Providencia,Privada,21.0,84.0
+8,San Andrés y Providencia,Pública,4.0,16.0
+9,Amazonas,Mixta,0.0,0.0
+10,Amazonas,Privada,13.0,52.0
+11,Amazonas,Pública,12.0,48.0
+12,Guaviare,Mixta,0.0,0.0
+13,Guaviare,Privada,23.0,67.65
+14,Guaviare,Pública,11.0,32.35
+15,Vaupés,Mixta,0.0,0.0
+16,Vaupés,Privada,1.0,1.82
+17,Vaupés,Pública,54.0,98.18
+18,Caquetá,Mixta,0.0,0.0
+19,Caquetá,Privada,83.0,76.15
+20,Caquetá,Pública,26.0,23.85
+21,Putumayo,Mixta,0.0,0.0
+22,Putumayo,Privada,95.0,76.61
+23,Putumayo,Pública,29.0,23.39
+24,Arauca,Mixta,1.0,0.7
+25,Arauca,Privada,92.0,64.79
+26,Arauca,Pública,49.0,34.51
+27,Casanare,Mixta,1.0,0.48
+28,Casanare,Privada,178.0,85.17
+29,Casanare,Pública,30.0,14.35
+30,Quindío,Mixta,0.0,0.0
+31,Quindío,Privada,205.0,86.86
+32,Quindío,Pública,31.0,13.14
+33,Chocó,Mixta,2.0,0.75
+34,Chocó,Privada,227.0,85.66
+35,Chocó,Pública,36.0,13.58
+36,Caldas,Mixta,1.0,0.29
+37,Caldas,Privada,276.0,80.0
+38,Caldas,Pública,68.0,19.71
+39,Risaralda,Mixta,0.0,0.0
+40,Risaralda,Privada,317.0,86.14
+41,Risaralda,Pública,51.0,13.86
+42,Huila,Mixta,0.0,0.0
+43,Huila,Privada,291.0,78.02
+44,Huila,Pública,82.0,21.98
+45,La Guajira,Mixta,0.0,0.0
+46,La Guajira,Privada,274.0,64.17
+47,La Guajira,Pública,153.0,35.83
+48,Cauca,Mixta,0.0,0.0
+49,Cauca,Privada,331.0,68.96
+50,Cauca,Pública,149.0,31.04
+51,Meta,Mixta,0.0,0.0
+52,Meta,Privada,416.0,86.13
+53,Meta,Pública,67.0,13.87
+54,Sucre,Mixta,1.0,0.19
+55,Sucre,Privada,437.0,85.19
+56,Sucre,Pública,75.0,14.62
+57,Norte de Santander,Mixta,0.0,0.0
+58,Norte de Santander,Privada,386.0,74.52
+59,Norte de Santander,Pública,132.0,25.48
+60,Tolima,Mixta,1.0,0.19
+61,Tolima,Privada,400.0,76.19
+62,Tolima,Pública,124.0,23.62
+63,Boyacá,Mixta,0.0,0.0
+64,Boyacá,Privada,406.0,72.24
+65,Boyacá,Pública,156.0,27.76
+66,Cesar,Mixta,0.0,0.0
+67,Cesar,Privada,467.0,76.43
+68,Cesar,Pública,144.0,23.57
+69,Magdalena,Mixta,0.0,0.0
+70,Magdalena,Privada,505.0,72.87
+71,Magdalena,Pública,188.0,27.13
+72,Nariño,Mixta,3.0,0.38
+73,Nariño,Privada,446.0,55.75
+74,Nariño,Pública,351.0,43.88
+75,Cundinamarca,Mixta,0.0,0.0
+76,Cundinamarca,Privada,634.0,77.51
+77,Cundinamarca,Pública,184.0,22.49
+78,Córdoba,Mixta,0.0,0.0
+79,Córdoba,Privada,599.0,72.96
+80,Córdoba,Pública,222.0,27.04
+81,Bolívar,Mixta,0.0,0.0
+82,Bolívar,Privada,755.0,77.84
+83,Bolívar,Pública,215.0,22.16
+84,Santander,Mixta,0.0,0.0
+85,Santander,Privada,884.0,84.35
+86,Santander,Pública,164.0,15.65
+87,Atlántico,Mixta,39.0,3.2
+88,Atlántico,Privada,1095.0,89.98
+89,Atlántico,Pública,83.0,6.82
+90,Valle del cauca,Mixta,1.0,0.05
+91,Valle del cauca,Privada,1544.0,82.61
+92,Valle del cauca,Pública,324.0,17.34
+93,Antioquia,Mixta,8.0,0.37
+94,Antioquia,Privada,1861.0,86.76
+95,Antioquia,Pública,276.0,12.87
+96,Bogotá D.C,Mixta,1.0,0.03
+97,Bogotá D.C,Privada,2769.0,95.75
+98,Bogotá D.C,Pública,122.0,4.22
