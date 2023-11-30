@@ -7,15 +7,17 @@ Análisis de los Servicios de Salud en Colombia
 """
 
 texto_introduccion = """
-El sector de salud y protección social es un ámbito complejo y vital para
-cualquier sociedad. Por esta razón, comprender los patrones de contratación que se
-llevan a cabo en este sector es fundamental para mejorar su funcionamiento y garantizar
-una atención adecuada a las personas que lo necesitan. Por medio de la investigación,
-se busca obtener un conocimiento profundo de las prácticas de contratación en el sector
-de salud y protección social, identificando las fortalezas y debilidades del sistema actual.
-Se busca presentar la herramienta realizada a personas expertas en el sector con el objetivo
-de tener una retroalimentación sobre los indicadores que se considerar y que tan acertada es
-la aplicación a partir de su experiencia.
+La salud es crucial para el bienestar social y el desarrollo de las naciones. En Colombia,
+el sistema de salud ha experimentado avances, pero persisten desigualdades. Actualmente, el
+país debate la reforma propuesta por el presidente Gustavo Petro. Este investigación analiza el
+sistema de salud colombiano, centrándose en las Instituciones Prestadoras de Servicios de Salud
+(IPS), como centros de salud, hospitales y clínicas. Se utilizarán bases de datos como el REPS y
+el SIHO para proporcionar una visión integral de la configuración y funcionamiento del sistema. Se
+abordarán problemas al comparar IPS debido a su naturaleza jurídica, proponiendo un modelo de Machine
+Learning para extender la clasificación. También se analizará la evolución de la infraestructura
+sanitaria entre 2002 y 2022 a nivel nacional y por departamento. La investigación busca contribuir al
+entendimiento del sistema de salud colombiano y guiar decisiones futuras para mejorar la eficiencia
+y calidad de los servicios.
 """
 
 texto_foot = """
