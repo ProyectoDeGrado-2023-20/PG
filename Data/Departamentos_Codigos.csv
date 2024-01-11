@@ -1,0 +1,34 @@
+﻿Codigo,Departamento_DANE,Departamento_DIVIPOLA,Departamento_REPS,Departamento_IPS_Complejidad,Departamento_IPS_Atencion_Capacidad,Departamento_Capacidad_Instalada_Mal,Departamento_Capacidad_Instalada,Departamento_Radiografia,Departamento_Caracterizacion,Departamento
+5,Antioquia,ANTIOQUIA,Antioquia,Antioquia,Antioquia,Antioquia,Antioquia,Antioquia,Antioquia,Antioquia
+8,Atlántico,ATLÁNTICO,AtlÃ¡ntico,AtlÃ¡ntico,AtlÃ¡ntico,AtlÃ¡ntico,Atlántico,Atlántico,Atlántico,Atlántico
+11,"Bogotá, D.C.","BOGOTÁ, D.C.",BogotÃ¡ D.C,BogotÃ¡ D.C,BogotÃ¡ D.C,"BogotÃ¡, D.C.","Bogotá, D.C.",Bogotá D.C,Bogotá D.C,Bogotá D.C
+13,Bolívar,BOLÍVAR,BolÃ­var,BolÃ­var,BolÃ­var,BolÃ­var,Bolívar,Bolívar,Bolívar,Bolívar
+15,Boyacá,BOYACÁ,BoyacÃ¡,BoyacÃ¡,BoyacÃ¡,BoyacÃ¡,Boyacá,Boyacá,Boyacá,Boyacá
+17,Caldas,CALDAS,Caldas,Caldas,Caldas,Caldas,Caldas,Caldas,Caldas,Caldas
+18,Caquetá,CAQUETÁ,CaquetÃ¡,CaquetÃ¡,CaquetÃ¡,CaquetÃ¡,Caquetá,Caquetá,Caquetá,Caquetá
+19,Cauca,CAUCA,Cauca,Cauca,Cauca,Cauca,Cauca,Cauca,Cauca,Cauca
+20,Cesar,CESAR,Cesar,Cesar,Cesar,Cesar,Cesar,Cesar,Cesar,Cesar
+23,Córdoba,CÓRDOBA,CÃ³rdoba,CÃ³rdoba,CÃ³rdoba,CÃ³rdoba,Córdoba,Córdoba,Córdoba,Córdoba
+25,Cundinamarca,CUNDINAMARCA,Cundinamarca,Cundinamarca,Cundinamarca,Cundinamarca,Cundinamarca,Cundinamarca,Cundinamarca,Cundinamarca
+27,Chocó,CHOCÓ,ChocÃ³,ChocÃ³,ChocÃ³,ChocÃ³,Chocó,Chocó,Chocó,Chocó
+41,Huila,HUILA,Huila,Huila,Huila,Huila,Huila,Huila,Huila,Huila
+44,La Guajira,LA GUAJIRA,La Guajira,La Guajira,La Guajira,La Guajira,La Guajira,La Guajira,La Guajira,La Guajira
+47,Magdalena,MAGDALENA,Magdalena,Magdalena,Magdalena,Magdalena,Magdalena,Magdalena,Magdalena,Magdalena
+50,Meta,META,Meta,Meta,Meta,Meta,Meta,Meta,Meta,Meta
+52,Nariño,NARIÑO,NariÃ±o,NariÃ±o,NariÃ±o,NariÃ±o,Nariño,Nariño,Nariño,Nariño
+54,Norte de Santander,NORTE DE SANTANDER,Norte de Santander,Norte de Santander,Norte de Santander,Norte de Santander,Norte de Santander,Norte de Santander,Norte de Santander,Norte de Santander
+63,Quindio,QUINDÍO,QuindÃ­o,QuindÃ­o,QuindÃ­o,QuindÃ­o,Quindío,Quindío,Quindío,Quindío
+66,Risaralda,RISARALDA,Risaralda,Risaralda,Risaralda,Risaralda,Risaralda,Risaralda,Risaralda,Risaralda
+68,Santander,SANTANDER,Santander,Santander,Santander,Santander,Santander,Santander,Santander,Santander
+70,Sucre,SUCRE,Sucre,Sucre,Sucre,Sucre,Sucre,Sucre,Sucre,Sucre
+73,Tolima,TOLIMA,Tolima,Tolima,Tolima,Tolima,Tolima,Tolima,Tolima,Tolima
+76,Valle del Cauca,VALLE DEL CAUCA,Valle del cauca,Valle del cauca,Valle del cauca,Valle del Cauca,Valle del Cauca,Valle del cauca,Valle del cauca,Valle del cauca
+81,Arauca,ARAUCA,Arauca,Arauca,Arauca,Arauca,Arauca,Arauca,Arauca,Arauca
+85,Casanare,CASANARE,Casanare,Casanare,Casanare,Casanare,Casanare,Casanare,Casanare,Casanare
+86,Putumayo,PUTUMAYO,Putumayo,Putumayo,Putumayo,Putumayo,Putumayo,Putumayo,Putumayo,Putumayo
+88,Archipiélago de San Andrés,"ARCHIPIÉLAGO DE SAN ANDRÉS, PROVIDENCIA Y SANTA CATALINA",San AndrÃ©s y Providencia,San AndrÃ©s y Providencia,San AndrÃ©s y Providencia,"ArchipiÃ©lago de San AndrÃ©s, Providencia y Santa Catalina","Archipiélago de San Andrés, Providencia y Santa Catalina",San Andrés y Providencia,San Andrés y Providencia,San Andrés y Providencia
+91,Amazonas,AMAZONAS,Amazonas,Amazonas,Amazonas,Amazonas,Amazonas,Amazonas,Amazonas,Amazonas
+94,Guainía,GUAINÍA,GuainÃ­a,GuainÃ­a,GuainÃ­a,GuainÃ­a,Guainía,Guainía,Guainía,Guainía
+95,Guaviare,GUAVIARE,Guaviare,Guaviare,Guaviare,Guaviare,Guaviare,Guaviare,Guaviare,Guaviare
+97,Vaupés,VAUPÉS,VaupÃ©s,VaupÃ©s,VaupÃ©s,VaupÃ©s,Vaupés,Vaupés,Vaupés,Vaupés
+99,Vichada,VICHADA,Vichada,Vichada,Vichada,Vichada,Vichada,Vichada,Vichada,Vichada
